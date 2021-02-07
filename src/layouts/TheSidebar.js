@@ -42,20 +42,15 @@ const TheSidebar = () => {
       }
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        />
-        <CIcon
-          className="c-sidebar-brand-minimized"
-          name="sygnet"
-          height={35}
+        <img
+          src="/public/images/apphr_logo.png"
+          alt=""
+          style={{ height: '35px' }}
         />
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement
-          items={navigation.map(i => {
+          items={navigation.map((i) => {
             changeName(i);
             return i;
           })}
