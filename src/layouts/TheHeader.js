@@ -103,9 +103,8 @@ const TheHeader = () => {
           </ul>
         </div>
         <TheHeaderDropdownNotif />
-        <TheHeaderDropdownTasks />
         <TheHeaderDropdownMssg />
-        <TheHeaderDropdown />
+        <TheHeaderDropdownTasks />
       </CHeaderNav>
     </CHeader>
   );

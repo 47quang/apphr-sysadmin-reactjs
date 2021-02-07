@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   CButton,
   CCard,
@@ -15,10 +14,31 @@ import {
   CRow,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
+  const token = useSelector((state) => state.user.token);
+  if (token) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/',
+          state: { from: props.location },
+        }}
+      />
+    );
+  }
+
+  function handleLogin() {
+    // call api login
+  }
+
   return (
-    <div className="c-app c-default-layout flex-row align-items-center" style={{background: '#3c4b64'}}>
+    <div
+      className="c-app c-default-layout flex-row align-items-center"
+      style={{ background: '#3c4b64' }}
+    >
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md="4">
@@ -54,13 +74,12 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4">
+                        <CButton
+                          color="primary"
+                          className="px-4"
+                          onClick={handleLogin}
+                        >
                           Login
-                        </CButton>
-                      </CCol>
-                      <CCol xs="6" className="text-right">
-                        <CButton color="link" className="px-0">
-                          Forgot password?
                         </CButton>
                       </CCol>
                     </CRow>

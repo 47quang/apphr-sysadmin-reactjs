@@ -10,7 +10,6 @@ const loading = (
 );
 
 const Login = React.lazy(() => import('@Page/login/Login'));
-const Register = React.lazy(() => import('@Page/register/Register'));
 const Page404 = React.lazy(() => import('@Page/page404/Page404'));
 const Page500 = React.lazy(() => import('@Page/page500/Page500'));
 const TheLayout = React.lazy(() => import('@Layout/TheLayout'));
@@ -27,13 +26,6 @@ function App() {
             render={(props) => <Login {...props} />}
           />
           <Route
-            exact
-            path="/register"
-            name="Register Page"
-            render={(props) => <Register {...props} />}
-          />
-          <Route
-            exact
             path="/404"
             name="Page 404"
             render={(props) => <Page404 {...props} />}

@@ -1,7 +1,20 @@
 import React from 'react';
 import { TheContent, TheSidebar, TheFooter, TheHeader } from './index';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-const TheLayout = () => {
+const TheLayout = ({ location }) => {
+  const token = useSelector((state) => state.user.token);
+  if (!token) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: location },
+        }}
+      />
+    );
+  }
   return (
     <div className="c-app c-default-layout">
       <TheSidebar />
