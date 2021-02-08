@@ -1,6 +1,12 @@
 import axios from 'axios';
 import querystring from 'query-string';
 
+function getDefaultHeaders() {
+  return {
+    'Authorization': 'Bearer ' + cookieUtil.getCookie('token')
+  };
+}
+
 const client = axios.create({
   baseURL: '',
   headers: {
@@ -10,12 +16,6 @@ const client = axios.create({
   timeout: 20000,
   withCredentials: false,
 });
-
-function getDefaultHeaders() {
-  return {
-    'Authorization': 'Bearer ' + cookieUtil.getCookie('token')
-  };
-}
 
 client.interceptors.request.use((config) => {
   Object.assign(config.headers, getDefaultHeaders());
