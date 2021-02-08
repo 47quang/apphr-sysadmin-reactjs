@@ -1,13 +1,35 @@
-import { SET_STYLE_DARK, SET_STYLE_LIGHT } from './types';
+import axios from 'axios';
+import querystring from 'querystring';
 
-export const setStyleDark = () => ({
-  type: SET_STYLE_DARK,
-  color: '#511951',
-  backgroundColor: '#eaafea',
+const client = axios.create({
+  baseURL: '',
+  headers: {
+    'content-type': 'application/json',
+  },
+  paramsSerializer: (params) => querystring.stringify(params),
+  timeout: 20000,
+  withCredentials: false,
 });
 
-export const setStyleLight = () => ({
-  type: SET_STYLE_LIGHT,
-  color: '#eaafea',
-  backgroundColor: '#511951',
+function getDefaultHeaders() {
+  return {
+    'Authorization': 'Bearer ' + cookieUtil.getCookie('token')
+  };
+}
+
+client.interceptors.request.use((config) => {
+  Object.assign(config.headers, getDefaultHeaders());
+  return config;
 });
+
+client.interceptors.response.use(
+  (response) => {
+    if (response && response.data) {
+      return response.data;
+    }
+    return response;
+  },
+  (e) => {
+    throw e;
+  }
+);
