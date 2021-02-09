@@ -15,28 +15,28 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
+      template: './src/index.html'
+    })
   ],
   resolve: {
     modules: [
       path.resolve(__dirname, './src'),
-      path.resolve(__dirname, './node_modules'),
+      path.resolve(__dirname, './node_modules')
     ],
     extensions: ['.js', '.jsx'],
     alias: {
@@ -46,13 +46,13 @@ module.exports = {
       '@Util': path.resolve(__dirname, './src/utils'),
       '@Page': path.resolve(__dirname, './src/pages'),
       '@Layout': path.resolve(__dirname, './src/layouts'),
-      '@Api': path.resolve(__dirname, './src/stores/apis'),
-    },
+      '@Api': path.resolve(__dirname, './src/stores/apis')
+    }
   },
   optimization: {
     splitChunks: {
-      chunks: 'all',
-    },
+      chunks: 'all'
+    }
   },
   devServer: {
     host: 'localhost',

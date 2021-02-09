@@ -5,43 +5,35 @@ export default [
     sortable: true,
     filter: true,
     checkboxSelection: true,
-    floatingFilter: true,
   },
   {
     headerName: 'Country',
-    field: 'country',
-    floatingFilter: true,
+    field: 'country'
   },
   {
     headerName: 'Email',
-    field: 'email',
-    floatingFilter: true,
+    field: 'email'
   },
   {
     headerName: 'Address',
-    floatingFilter: true,
-    field: 'address',
+    field: 'address'
   },
   {
     headerName: 'Sub domain',
-    floatingFilter: true,
-    field: 'subDomain',
+    field: 'subDomain'
   },
   {
     headerName: 'Status',
-    floatingFilter: true,
-    field: 'status',
+    field: 'status'
   },
   {
     headerName: 'Tax code',
-    floatingFilter: true,
-    field: 'taxCode',
+    field: 'taxCode'
   },
   {
     headerName: 'Created at',
     filter: 'agDateColumnFilter',
-    floatingFilter: true,
-    field: 'createdAt',
+    field: 'createdAt'
     // flex: 1 // fill the remaining empty space of the grid
-  },
+  }
 ];
