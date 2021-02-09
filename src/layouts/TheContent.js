@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { CContainer, CFade } from '@coreui/react';
+import utils from '@Util/index';
 
 // routes config
 import routes from '@Route/routes';
@@ -27,7 +28,7 @@ const TheContent = ({ t, i18n }) => {
                     name={route.name}
                     render={(props) => (
                       <CFade>
-                        <route.component t={t} i18n={i18n} {...props} />
+                        <route.component utils={utils} t={t} i18n={i18n} {...props} />
                       </CFade>
                     )}
                   />
