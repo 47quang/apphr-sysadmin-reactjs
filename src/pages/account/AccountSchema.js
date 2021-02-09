@@ -42,6 +42,6 @@ export default [
     filter: 'agDateColumnFilter',
     floatingFilter: true,
     field: 'createdAt',
-    flex: 1 // fill the remaining empty space of the grid
+    // flex: 1 // fill the remaining empty space of the grid
   },
 ];

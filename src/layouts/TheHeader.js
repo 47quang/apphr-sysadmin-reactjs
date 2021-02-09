@@ -44,10 +44,10 @@ const TheHeader = () => {
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
-        <CBreadcrumbRouter
+        {/* <CBreadcrumbRouter
           className="border-0 c-subheader-nav m-0 px-0 px-md-3"
           routes={routes}
-        />
+        /> */}
       </CHeaderNav>
 
       <CHeaderNav className="px-3">

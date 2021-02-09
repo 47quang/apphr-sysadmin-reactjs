@@ -269,16 +269,10 @@ function Account({ t, utils }) {
   const [selectedCast, setSelectedCast] = useState(castData[0]);
 
   const onStartColumnClick = (e) => {
-    setSelectedMovie(
-      movieData.find((item) => item.movie === e.detail.item.dataset.movie)
-    );
-    setLayout(FCLLayout.TwoColumnsMidExpanded);
+    setLayout(FCLLayout.TwoColumnsStartExpanded);
   };
 
   const onMiddleColumnClick = (e) => {
-    setSelectedCast(
-      castData.find((item) => item.name === e.detail.item.dataset.name)
-    );
     setLayout(FCLLayout.ThreeColumnsEndExpanded);
   };
 
@@ -302,6 +296,10 @@ function Account({ t, utils }) {
   }
 
   const gridOptions = {
+    onGridReady: params => {
+      params.api.sizeColumnsToFit()
+      // gridApi.current = params.api
+    },
     columnDefs: JSON.parse(JSON.stringify(accountSchema)).map((i) => {
       i.headerName = t(i.headerName);
       if (i.field === 'id') {
@@ -317,6 +315,9 @@ function Account({ t, utils }) {
     },
     pagination: true,
     rowSelection: 'multiple',
+    onRowClicked: (e) => {
+      onStartColumnClick();
+    }
   };
 
   return (
@@ -331,7 +332,7 @@ function Account({ t, utils }) {
         </div>
       }
       midColumn={
-        <>
+        <div>
           <Toolbar design="Solid">
             <Title>{selectedMovie.movie}</Title>
             <ToolbarSpacer />
@@ -406,7 +407,7 @@ function Account({ t, utils }) {
               </StandardListItem>
             ))}
           </List>
-        </>
+        </div>
       }
       endColumn={
         <>
