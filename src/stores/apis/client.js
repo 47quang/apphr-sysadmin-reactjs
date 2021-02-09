@@ -3,12 +3,12 @@ import querystring from 'query-string';
 
 function getDefaultHeaders() {
   return {
-    'Authorization': 'Bearer ' + cookieUtil.getCookie('token')
+    Authorization: 'Bearer ' + localStorage.getItem('token'),
   };
 }
 
 const client = axios.create({
-  baseURL: '',
+  baseURL: 'http://54.254.78.127:9093',
   headers: {
     'content-type': 'application/json',
   },
@@ -18,7 +18,7 @@ const client = axios.create({
 });
 
 client.interceptors.request.use((config) => {
-  Object.assign(config.headers, getDefaultHeaders());
+  // Object.assign(config.headers, getDefaultHeaders());
   return config;
 });
 

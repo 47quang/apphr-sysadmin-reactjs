@@ -3,5 +3,13 @@
   "Dashboard": "Trang chủ",
   "Package": "Gói dịch vụ",
   "Account": "Tài khoản",
-  "Mail": "Hộp thư"
+  "Mail": "Hộp thư",
+  "Id": "Id",
+  "Email": "Địa chỉ mail",
+  "Country": "Đất nước",
+  "Address": "Địa chỉ",
+  "Sub domain": "Tên miền con",
+  "Status": "Trạng thái",
+  "Tax code": "Mã số thuế",
+  "Created at": "Ngày tạo"
 }

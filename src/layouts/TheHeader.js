@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
   CHeader,
-  CToggler,
   CHeaderBrand,
   CHeaderNav,
   CBreadcrumbRouter,
@@ -13,7 +12,6 @@ import routes from '@Route/routes';
 import '../styles/scss/header.scss';
 
 import {
-  TheHeaderDropdown,
   TheHeaderDropdownMssg,
   TheHeaderDropdownNotif,
   TheHeaderDropdownTasks,
@@ -26,29 +24,8 @@ const languages = [
 
 const TheHeader = () => {
   const { i18n } = useTranslation();
-  const style = useSelector((state) => state.style);
+  const language = useSelector((state) => state.style.language);
   const dispatch = useDispatch();
-  const toggleSidebar = () => {
-    const val = [true, 'responsive'].includes(style.sidebarShow)
-      ? false
-      : 'responsive';
-    dispatch({
-      type: 'CHANGE_SIDEBAR_VISIBILITY',
-      payload: { sidebarShow: val },
-    });
-  };
-
-  const toggleSidebarMobile = () => {
-    const val = [false, 'responsive'].includes(style.sidebarShow)
-      ? true
-      : 'responsive';
-    dispatch({
-      type: 'CHANGE_SIDEBAR_VISIBILITY',
-      payload: {
-        sidebarShow: val,
-      },
-    });
-  };
 
   function changeLanguage(language) {
     dispatch({
@@ -62,17 +39,6 @@ const TheHeader = () => {
 
   return (
     <CHeader withSubheader>
-      <CToggler
-        inHeader
-        className="ml-md-3 d-lg-none"
-        header
-        onClick={toggleSidebarMobile}
-      />
-      <CToggler
-        inHeader
-        className="ml-3 d-md-down-none"
-        onClick={toggleSidebar}
-      />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
         <CIcon name="logo" height="48" alt="Logo" />
       </CHeaderBrand>
@@ -86,15 +52,15 @@ const TheHeader = () => {
 
       <CHeaderNav className="px-3">
         <div className="lang">
-          <div className={style.language}></div>
+          <div className={language}></div>
           <ul className="dropdown">
-            {languages.map((language, index) => {
-              if (language.code != style.language) {
+            {languages.map((lng, index) => {
+              if (lng.code != language) {
                 return (
                   <li key={index}>
                     <div
-                      onClick={() => changeLanguage(language.code)}
-                      className={language.code}
+                      onClick={() => changeLanguage(lng.code)}
+                      className={lng.code}
                     ></div>
                   </li>
                 );

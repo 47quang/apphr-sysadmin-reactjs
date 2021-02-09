@@ -41,12 +41,12 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       '@Component': path.resolve(__dirname, './src/components'),
-      '@Api': path.resolve(__dirname, './src/api'),
       '@Store': path.resolve(__dirname, './src/store'),
       '@Route': path.resolve(__dirname, './src/routes'),
       '@Util': path.resolve(__dirname, './src/utils'),
       '@Page': path.resolve(__dirname, './src/pages'),
-      '@Layout': path.resolve(__dirname, './src/layouts')
+      '@Layout': path.resolve(__dirname, './src/layouts'),
+      '@Api': path.resolve(__dirname, './src/stores/apis'),
     },
   },
   optimization: {

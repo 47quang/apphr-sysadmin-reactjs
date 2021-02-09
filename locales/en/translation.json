@@ -3,5 +3,13 @@
   "Dashboard": "Dashboard",
   "Package": "Package",
   "Account": "Account",
-  "Mail": "Mail"
+  "Mail": "Mail",
+  "Id": "Id",
+  "Email": "Email",
+  "Country": "Country",
+  "Address": "Address",
+  "Sub domain": "Sub domain",
+  "Status": "Status",
+  "Tax code": "Tax code",
+  "Created at": "Created at"
 }

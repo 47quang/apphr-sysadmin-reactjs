@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   CCreateElement,
   CSidebar,
@@ -16,9 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 const TheSidebar = () => {
   const navigation = JSON.parse(JSON.stringify(nav));
-  const dispatch = useDispatch();
   const { t } = useTranslation();
-  const sidebarShow = useSelector((state) => state.style.sidebarShow);
 
   function changeName(tree) {
     if (tree.name) {
@@ -31,15 +28,7 @@ const TheSidebar = () => {
     }
   }
   return (
-    <CSidebar
-      show={sidebarShow}
-      onShowChange={(val) =>
-        dispatch({
-          type: 'CHANGE_SIDEBAR_VISIBILITY',
-          payload: { sidebarShow: val },
-        })
-      }
-    >
+    <CSidebar>
       <CSidebarBrand className="d-md-down-none" to="/">
         <img
           src="/public/images/apphr_logo.png"

@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 import './styles/css/app.css';
 import './styles/scss/style.scss';
 
@@ -14,10 +15,8 @@ const Page404 = React.lazy(() => import('@Page/page404/Page404'));
 const Page500 = React.lazy(() => import('@Page/page500/Page500'));
 const TheLayout = React.lazy(() => import('@Layout/TheLayout'));
 
-function App() {
+function App(props) {
   return (
-    <HashRouter>
-      <Suspense fallback={loading}>
         <Switch>
           <Route
             exact
@@ -42,9 +41,7 @@ function App() {
             render={(props) => <TheLayout {...props} />}
           />
         </Switch>
-      </Suspense>
-    </HashRouter>
   );
 }
 
-export default App;
+export default withTranslation()(App);

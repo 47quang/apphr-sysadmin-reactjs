@@ -1,10 +1,10 @@
 import client from './client';
 
 const AccountApi = {
-  getUsers() {
+  getAccounts(params) {
     return new Promise((resolve, reject) => {
       client
-        .get('/api.user')
+        .get('/merchant', { params })
         .then((data) => {
           resolve(data);
         })
@@ -12,8 +12,7 @@ const AccountApi = {
           reject(err);
         });
     });
-  }
-  
-}
+  },
+};
 
 export default AccountApi;
