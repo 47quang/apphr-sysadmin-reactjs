@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
 import { FlexibleColumnLayout } from '@ui5/webcomponents-react';
+import React, { useRef, useState } from 'react';
 import AccountGrid from './AccountGrid';
 import AccountObjectPage from './AccountObjectPage';
 

@@ -1,26 +1,56 @@
-import React, { useState, useEffect } from 'react';
 import AccountApi from '@Api/account';
-import accountSchema from './AccountSchema';
 import { AgGridReact } from 'ag-grid-react';
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 
-const FCLLayout = {
-  OneColumn: 'OneColumn',
-  TwoColumnsStartExpanded: 'TwoColumnsStartExpanded',
-  TwoColumnsMidExpanded: 'TwoColumnsMidExpanded',
-  ThreeColumnsMidExpanded: 'ThreeColumnsMidExpanded',
-  ThreeColumnsEndExpanded: 'ThreeColumnsEndExpanded',
-  ThreeColumnsStartExpandedEndHidden: 'ThreeColumnsStartExpandedEndHidden',
-  ThreeColumnsMidExpandedEndHidden: 'ThreeColumnsMidExpandedEndHidden',
-  MidColumnFullScreen: 'MidColumnFullScreen',
-  EndColumnFullScreen: 'EndColumnFullScreen'
-};
+const accountSchema = [
+  {
+    headerName: 'Id',
+    field: 'id',
+    sortable: true,
+    filter: true,
+    checkboxSelection: true
+  },
+  {
+    headerName: 'Country',
+    field: 'country'
+  },
+  {
+    headerName: 'Email',
+    field: 'email'
+  },
+  {
+    headerName: 'Address',
+    field: 'address'
+  },
+  {
+    headerName: 'Sub domain',
+    field: 'subDomain'
+  },
+  {
+    headerName: 'Status',
+    field: 'status'
+  },
+  {
+    headerName: 'Tax code',
+    field: 'taxCode'
+  },
+  {
+    headerName: 'Created at',
+    filter: 'agDateColumnFilter',
+    field: 'createdAt'
+    // flex: 1 // fill the remaining empty space of the grid
+  }
+];
 
-function AccountGrid({ t, utils, changeLayout, objectPageRef }) {
+function AccountGrid({ t, utils, changeLayout, objectPageRef, forwardedRef }) {
   const [accounts, setAccounts] = useState([]);
+  const [rowSelection, setRowSelection] = useState('multiple');
+  const gridApi = useRef();
 
   function onStartColumnClick(row) {
     objectPageRef.current.changeAccount(row);
-    changeLayout(FCLLayout.TwoColumnsStartExpanded);
+    setRowSelection('single');
+    changeLayout('TwoColumnsStartExpanded');
   }
 
   useEffect(async () => {
@@ -40,10 +70,23 @@ function AccountGrid({ t, utils, changeLayout, objectPageRef }) {
     return params.columnApi.getRowGroupColumns().length === 0;
   }
 
+  function deselectAll() {
+    gridApi.current.deselectAll();
+  }
+
+  useImperativeHandle(
+    forwardedRef,
+    () => ({
+      setRowSelection,
+      deselectAll
+    }),
+    []
+  );
+
   const gridOptions = {
     onGridReady: params => {
       params.api.sizeColumnsToFit();
-      // gridApi.current = params.api
+      gridApi.current = params.api;
     },
     columnDefs: JSON.parse(JSON.stringify(accountSchema)).map(i => {
       i.headerName = t(i.headerName);
@@ -61,7 +104,7 @@ function AccountGrid({ t, utils, changeLayout, objectPageRef }) {
       resizable: true
     },
     pagination: true,
-    rowSelection: 'multiple',
+    rowSelection,
     onRowClicked: e => {
       onStartColumnClick(e.data);
     },

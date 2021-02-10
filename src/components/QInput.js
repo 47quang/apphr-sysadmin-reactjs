@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, Input, Label } from 'reactstrap';
+import { FormFeedback, FormGroup, Input, Label } from 'reactstrap';
 
 QInput.defaultProps = {
   type: 'text',
@@ -22,6 +22,9 @@ QInput.propTypes = {
 function QInput(props) {
   const { field, form, type, label, placeholder, disabled } = props;
   const { name, value, onChange, onBlur } = field;
+  const { errors, touched } = form;
+
+  const isError = errors[name] && touched[name];
 
   return (
     <FormGroup>
@@ -35,7 +38,9 @@ function QInput(props) {
         onBlur={onBlur}
         value={value}
         type={type}
+        invalid={isError}
       />
+      {isError && <FormFeedback>{errors[name]}</FormFeedback>}
     </FormGroup>
   );
 }

@@ -1,17 +1,18 @@
-import React, { useState, useImperativeHandle } from 'react';
-import {
-  ObjectPage,
-  Button,
-  FlexBox,
-  Link,
-  Label,
-  ProgressIndicator,
-  ObjectStatus,
-  ObjectPageSection,
-  ButtonDesign
-} from '@ui5/webcomponents-react';
-import { FastField, Formik, Form } from 'formik';
 import QInput from '@Component/QInput';
+import {
+  Button,
+  ButtonDesign,
+  FlexBox,
+  Label,
+  Link,
+  ObjectPage,
+  ObjectPageSection,
+  ObjectStatus,
+  ProgressIndicator
+} from '@ui5/webcomponents-react';
+import { FastField, Form, Formik } from 'formik';
+import React, { useImperativeHandle, useState } from 'react';
+import * as yup from 'yup';
 
 function mappingStatus(status) {
   switch (status) {
@@ -26,8 +27,16 @@ function mappingStatus(status) {
   }
 }
 
-function AccountObjectPage({ t, forwardedRef, changeLayout }) {
+function AccountObjectPage({ t, forwardedRef, changeLayout, gridRef }) {
   const [account, setAccount] = useState({});
+
+  const validationSchema = yup.object().shape({
+    companyName: yup.string().required('Đây là field được yêu cầu'),
+    email: yup.string(),
+    taxCode: yup.string(),
+    postCode: yup.string(),
+    subDomain: yup.string()
+  });
 
   const initialValues = {
     companyName: account.companyName,
@@ -42,6 +51,8 @@ function AccountObjectPage({ t, forwardedRef, changeLayout }) {
   }
 
   function closeObjectPage() {
+    gridRef.current.setRowSelection('multiple');
+    gridRef.current.deselectAll();
     changeLayout('OneColumn');
   }
 
@@ -61,7 +72,9 @@ function AccountObjectPage({ t, forwardedRef, changeLayout }) {
       <Button key="2" design={ButtonDesign.Negative}>
         Remove
       </Button>,
-      <Button key="3" onClick={closeObjectPage}>Close</Button>
+      <Button key="3" onClick={closeObjectPage}>
+        Close
+      </Button>
     ],
     headerContentPinnable: true,
     image: account.avatar,
@@ -105,10 +118,12 @@ function AccountObjectPage({ t, forwardedRef, changeLayout }) {
         id="information-company"
         title="Information Company"
       >
-        <Formik initialValues={initialValues}>
+        <Formik
+          initialValues={(account && account.length > 0) || initialValues}
+          enableReinitialize
+          validationSchema={validationSchema}
+        >
           {fProps => {
-            const { values, errors, touched } = fProps;
-            console.log({ values, errors, touched });
             return (
               <Form>
                 <FastField
