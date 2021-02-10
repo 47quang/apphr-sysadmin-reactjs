@@ -23,7 +23,7 @@ const TheLayout = ({ location }) => {
         <div className="c-body">
           <TheContent />
         </div>
-        <TheFooter />
+        {/* <TheFooter /> */}
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import '@ui5/webcomponents-react/dist/Assets.js';
 import '@ui5/webcomponents-fiori/dist/Assets.js';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
 import './i18n/i18n';
 
 const loading = (

@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AccountApi from '@Api/account';
-import { AgGridReact } from 'ag-grid-react';
 import accountSchema from './AccountSchema';
-import { FlexibleColumnLayout } from '@ui5/webcomponents-react';
-import ObjectPageAccount from './ObjectPageAccount';
+import { AgGridReact } from 'ag-grid-react';
 
 const FCLLayout = {
   OneColumn: 'OneColumn',
@@ -17,16 +15,14 @@ const FCLLayout = {
   EndColumnFullScreen: 'EndColumnFullScreen'
 };
 
-function AllAccount({ t, utils }) {
-  const [layout, setLayout] = useState(FCLLayout.OneColumn);
-  const [selectedRow, setSelectedRow] = useState({});
-
-  const onStartColumnClick = row => {
-    setSelectedRow(row);
-    setLayout(FCLLayout.TwoColumnsStartExpanded);
-  };
-
+function AccountGrid({ t, utils, changeLayout, objectPageRef }) {
   const [accounts, setAccounts] = useState([]);
+
+  function onStartColumnClick(row) {
+    objectPageRef.current.changeAccount(row);
+    changeLayout(FCLLayout.TwoColumnsStartExpanded);
+  }
+
   useEffect(async () => {
     const { payload } = await AccountApi.getAccounts({
       size: 100,
@@ -40,7 +36,6 @@ function AllAccount({ t, utils }) {
       })
     );
   }, []);
-
   function headerCheckboxSelection(params) {
     return params.columnApi.getRowGroupColumns().length === 0;
   }
@@ -70,29 +65,12 @@ function AllAccount({ t, utils }) {
     onRowClicked: e => {
       onStartColumnClick(e.data);
     },
-    getRowNodeId: d => d._id,
     allowDragFromColumnsToolPanel: true
   };
 
   return (
-    <FlexibleColumnLayout
-      style={{
-        height: 800
-      }}
-      layout={layout}
-      startColumn={
-        <div className="ag-theme-alpine" style={{ width: '100%', height: 800 }}>
-          <AgGridReact {...gridOptions}></AgGridReact>
-        </div>
-      }
-      midColumn={
-        <div>
-          <ObjectPageAccount data={selectedRow} />
-        </div>
-      }
-      endColumn={<div></div>}
-    />
+    <AgGridReact {...gridOptions} style={{ overflowX: 'hidden' }}></AgGridReact>
   );
 }
 
-export default AllAccount;
+export default AccountGrid;
