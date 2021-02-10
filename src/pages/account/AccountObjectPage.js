@@ -39,11 +39,11 @@ function AccountObjectPage({ t, forwardedRef, changeLayout, gridRef }) {
   });
 
   const initialValues = {
-    companyName: account.companyName,
-    email: account.email,
-    taxCode: account.taxCode,
-    postCode: account.postCode,
-    subDomain: account.subDomain
+    name: '',
+    email: '',
+    taxCode: '',
+    postCode: '',
+    subDomain: ''
   };
 
   function changeAccount(acc) {
@@ -63,6 +63,8 @@ function AccountObjectPage({ t, forwardedRef, changeLayout, gridRef }) {
     }),
     []
   );
+
+  console.log({ account });
 
   const options = {
     headerActions: [
@@ -119,7 +121,7 @@ function AccountObjectPage({ t, forwardedRef, changeLayout, gridRef }) {
         title="Information Company"
       >
         <Formik
-          initialValues={(account && account.length > 0) || initialValues}
+          initialValues={Object.assign(initialValues, account)}
           enableReinitialize
           validationSchema={validationSchema}
         >
@@ -127,7 +129,7 @@ function AccountObjectPage({ t, forwardedRef, changeLayout, gridRef }) {
             return (
               <Form>
                 <FastField
-                  name="companyName"
+                  name="name"
                   component={QInput}
                   label="Company name"
                   placeholder="Enter company name"

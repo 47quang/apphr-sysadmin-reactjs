@@ -21,7 +21,7 @@ QInput.propTypes = {
 
 function QInput(props) {
   const { field, form, type, label, placeholder, disabled } = props;
-  const { name, value, onChange, onBlur } = field;
+  const { name } = field;
   const { errors, touched } = form;
 
   const isError = errors[name] && touched[name];
@@ -30,15 +30,12 @@ function QInput(props) {
     <FormGroup>
       {label && <Label for={name}>{label}</Label>}
       <Input
-        name={name}
         id={name}
-        placeholder={placeholder}
-        disabled={disabled}
-        onChange={onChange}
-        onBlur={onBlur}
-        value={value}
+        {...field}
         type={type}
         invalid={isError}
+        disabled={disabled}
+        placeholder={placeholder}
       />
       {isError && <FormFeedback>{errors[name]}</FormFeedback>}
     </FormGroup>
