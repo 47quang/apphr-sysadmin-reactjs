@@ -8,14 +8,18 @@ import {
   CSidebarNavTitle,
   CSidebarMinimizer,
   CSidebarNavDropdown,
-  CSidebarNavItem,
+  CSidebarNavItem
 } from '@coreui/react';
 import nav from './_nav';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
 const TheSidebar = () => {
   const navigation = JSON.parse(JSON.stringify(nav));
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+  const show = useSelector(state => state.style.sidebarShow);
 
   function changeName(tree) {
     if (tree.name) {
@@ -28,7 +32,10 @@ const TheSidebar = () => {
     }
   }
   return (
-    <CSidebar>
+    <CSidebar
+      show={show}
+      onShowChange={val => dispatch({ type: 'set', sidebarShow: val })}
+    >
       <CSidebarBrand className="d-md-down-none" to="/">
         <img
           src="/public/images/sysadmin_logo.png"
@@ -38,7 +45,7 @@ const TheSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement
-          items={navigation.map((i) => {
+          items={navigation.map(i => {
             changeName(i);
             return i;
           })}
@@ -46,7 +53,7 @@ const TheSidebar = () => {
             CSidebarNavDivider,
             CSidebarNavDropdown,
             CSidebarNavItem,
-            CSidebarNavTitle,
+            CSidebarNavTitle
           }}
         />
       </CSidebarNav>

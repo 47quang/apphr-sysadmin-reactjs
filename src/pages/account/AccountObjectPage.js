@@ -69,10 +69,10 @@ function AccountObjectPage({ t, forwardedRef, changeLayout, gridRef }) {
   const options = {
     headerActions: [
       <Button key="1" design={ButtonDesign.Emphasized}>
-        Edit
+        Update
       </Button>,
       <Button key="2" design={ButtonDesign.Negative}>
-        Remove
+        Delete
       </Button>,
       <Button key="3" onClick={closeObjectPage}>
         Close

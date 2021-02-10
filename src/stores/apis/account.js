@@ -5,14 +5,26 @@ const AccountApi = {
     return new Promise((resolve, reject) => {
       client
         .get('/merchant', { params })
-        .then((data) => {
+        .then(data => {
           resolve(data);
         })
-        .catch((err) => {
+        .catch(err => {
           reject(err);
         });
     });
   },
+  updateAccount(params) {
+    return new Promise((resolve, reject) => {
+      client
+        .put('/merchant', params)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 };
 
 export default AccountApi;

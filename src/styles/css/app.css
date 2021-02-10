@@ -6,3 +6,11 @@
   background: #888;
   border-radius: 1em;
 }
+
+.ObjectPage-titleBar-0-2-8 {
+  padding: 0.5rem 0rem 0.5rem 2rem !important;
+}
+
+.ObjectPage-header-0-2-5 {
+  padding-right: 0 !important; 
+}
