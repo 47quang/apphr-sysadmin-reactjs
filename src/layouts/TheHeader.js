@@ -41,7 +41,6 @@ const TheHeader = () => {
   }
 
   const toggleSidebar = () => {
-    console.log(sidebarShow)
     const val = [true, 'responsive'].includes(sidebarShow)
     ? false
     : 'responsive';
@@ -49,7 +48,6 @@ const TheHeader = () => {
   };
   
   const toggleSidebarMobile = () => {
-    console.log(sidebarShow)
     const val = [false, 'responsive'].includes(sidebarShow)
       ? true
       : 'responsive';

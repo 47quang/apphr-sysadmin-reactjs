@@ -46,7 +46,8 @@ module.exports = {
       '@Util': path.resolve(__dirname, './src/utils'),
       '@Page': path.resolve(__dirname, './src/pages'),
       '@Layout': path.resolve(__dirname, './src/layouts'),
-      '@Api': path.resolve(__dirname, './src/stores/apis')
+      '@Api': path.resolve(__dirname, './src/stores/apis'),
+      '@Action': path.resolve(__dirname, './src/stores/actions')
     }
   },
   optimization: {

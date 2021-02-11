@@ -64,8 +64,6 @@ function AccountObjectPage({ t, forwardedRef, changeLayout, gridRef }) {
     []
   );
 
-  console.log({ account });
-
   const options = {
     headerActions: [
       <Button key="1" design={ButtonDesign.Emphasized}>

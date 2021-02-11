@@ -1,7 +1,7 @@
-import AccountApi from '@Api/account';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAccounts } from '@Action/account';
 const accountSchema = [
   {
     headerName: 'Id',
@@ -43,9 +43,16 @@ const accountSchema = [
 ];
 
 function AccountGrid({ t, utils, changeLayout, objectPageRef, forwardedRef }) {
-  const [accounts, setAccounts] = useState([]);
-  const [rowSelection, setRowSelection] = useState('multiple');
   const gridApi = useRef();
+  const dispatch = useDispatch();
+  const accounts = useSelector(state =>
+    state.account.accounts.map(acc => {
+      acc.createdAt = utils.formatDate(acc.createdAt);
+      acc.country = 'Viet Nam';
+      return acc;
+    })
+  );
+  const [rowSelection, setRowSelection] = useState('multiple');
 
   function onStartColumnClick(row) {
     objectPageRef.current.changeAccount(row);
@@ -53,19 +60,19 @@ function AccountGrid({ t, utils, changeLayout, objectPageRef, forwardedRef }) {
     changeLayout('TwoColumnsStartExpanded');
   }
 
-  useEffect(async () => {
-    const { payload } = await AccountApi.getAccounts({
-      size: 100,
-      page: 0
-    });
-    setAccounts(
-      payload.data.map(i => {
-        i.createdAt = utils.formatDate(i.createdAt);
-        i.country = 'vietnam';
-        return i;
-      })
-    );
+  useEffect(() => {
+    dispatch(fetchAccounts({ size: 100, page: 0 }));
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
+
+  function handleResize(e) {
+    if (e) e.preventDefault();
+    if (gridApi.current) gridApi.current.sizeColumnsToFit();
+  }
+
   function headerCheckboxSelection(params) {
     return params.columnApi.getRowGroupColumns().length === 0;
   }

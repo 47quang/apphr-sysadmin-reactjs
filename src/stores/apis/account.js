@@ -12,18 +12,6 @@ const AccountApi = {
           reject(err);
         });
     });
-  },
-  updateAccount(params) {
-    return new Promise((resolve, reject) => {
-      client
-        .put('/merchant', params)
-        .then(data => {
-          resolve(data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
   }
 };
 
