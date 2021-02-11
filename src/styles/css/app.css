@@ -14,3 +14,7 @@
 .ObjectPage-header-0-2-5 {
   padding-right: 0 !important; 
 }
+
+.c-sidebar .c-sidebar-nav-dropdown-toggle:hover, .c-sidebar .c-sidebar-nav-link:hover {
+  background: #303c54 !important;
+}
