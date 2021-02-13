@@ -15,7 +15,8 @@ import '../styles/scss/header.scss';
 import {
   TheHeaderDropdownMssg,
   TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
+  TheHeaderDropdownTasks,
+  TheHeaderDropdown
 } from './index';
 
 const languages = [
@@ -98,6 +99,7 @@ const TheHeader = () => {
         <TheHeaderDropdownNotif />
         <TheHeaderDropdownMssg />
         <TheHeaderDropdownTasks />
+        <TheHeaderDropdown/>
       </CHeaderNav>
     </CHeader>
   );

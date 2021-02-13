@@ -26,9 +26,9 @@ import {
   cibStripe,
   cibPaypal,
   cibGooglePay,
-  cibCcAmex,
+  cibCcAmex
 } from '@coreui/icons';
-import { cifUs, cifBr, cifIn, cifFr, cifEs, cifPl } from '@coreui/icons';
+import { cifUs, cifBr, cifIn, cifFr, cifEs, cifPl, cifVn } from '@coreui/icons';
 import {
   cilAlignCenter,
   cilAlignLeft,
@@ -123,7 +123,7 @@ import {
   cilWarning,
   cilDescription,
   cilTouchApp,
-  cilNewspaper,
+  cilNewspaper
 } from '@coreui/icons';
 
 export const icons = Object.assign(
@@ -131,7 +131,7 @@ export const icons = Object.assign(
   {
     sygnet,
     logo,
-    logoNegative,
+    logoNegative
   },
   {
     cilNewspaper,
@@ -227,7 +227,7 @@ export const icons = Object.assign(
     cilUserUnfollow,
     cilX,
     cilXCircle,
-    cilWarning,
+    cilWarning
   },
   {
     cifUs,
@@ -236,6 +236,7 @@ export const icons = Object.assign(
     cifFr,
     cifEs,
     cifPl,
+    cifVn
   },
   {
     cibSkype,
@@ -261,6 +262,6 @@ export const icons = Object.assign(
     cibStripe,
     cibPaypal,
     cibGooglePay,
-    cibCcAmex,
+    cibCcAmex
   }
 );

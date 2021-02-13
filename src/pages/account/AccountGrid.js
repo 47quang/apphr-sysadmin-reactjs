@@ -52,6 +52,9 @@ function AccountGrid({ t, utils, changeLayout, objectPageRef, forwardedRef }) {
       return acc;
     })
   );
+
+  console.log(accounts);
+
   const [rowSelection, setRowSelection] = useState('multiple');
 
   function onStartColumnClick(row) {
@@ -92,8 +95,8 @@ function AccountGrid({ t, utils, changeLayout, objectPageRef, forwardedRef }) {
 
   const gridOptions = {
     onGridReady: params => {
-      params.api.sizeColumnsToFit();
       gridApi.current = params.api;
+      params.api.sizeColumnsToFit();
     },
     columnDefs: JSON.parse(JSON.stringify(accountSchema)).map(i => {
       i.headerName = t(i.headerName);

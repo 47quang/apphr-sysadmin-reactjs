@@ -13,6 +13,12 @@ import {
 import nav from './_nav';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  TheHeaderDropdown,
+  TheHeaderDropdownNotif,
+  TheHeaderDropdownTasks,
+  TheHeaderDropdownMssg
+} from './index';
 
 const TheSidebar = () => {
   const navigation = JSON.parse(JSON.stringify(nav));
