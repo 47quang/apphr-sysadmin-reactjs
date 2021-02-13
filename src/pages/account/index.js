@@ -2,7 +2,6 @@ import { FlexibleColumnLayout } from '@ui5/webcomponents-react';
 import React, { useRef, useState } from 'react';
 import AccountGrid from './AccountGrid';
 import AccountObjectPage from './AccountObjectPage';
-
 function Account({ utils, t }) {
   const gridRef = useRef();
   const objectPageRef = useRef();
@@ -17,7 +16,7 @@ function Account({ utils, t }) {
       style={{ height: 850 }}
       layout={layout}
       startColumn={
-        <div className="ag-theme-alpine" style={{ width: '100%', height: 850 }}>
+        <div className="ag-theme-alpine" style={{ width: '100%', height: 805 }}>
           <AccountGrid
             t={t}
             utils={utils}

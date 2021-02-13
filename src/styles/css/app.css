@@ -18,3 +18,7 @@
 .c-sidebar .c-sidebar-nav-dropdown-toggle:hover, .c-sidebar .c-sidebar-nav-link:hover {
   background: #303c54 !important;
 }
+
+:host .ui5-shellbar-root {
+  padding: 0.25rem 0.5rem !important;
+}

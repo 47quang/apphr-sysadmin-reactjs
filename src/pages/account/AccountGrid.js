@@ -1,7 +1,8 @@
-import { AgGridReact } from 'ag-grid-react';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAccounts } from '@Action/account';
+import QTable from '../../components/QTable';
+
 const accountSchema = [
   {
     headerName: 'Id',
@@ -42,18 +43,47 @@ const accountSchema = [
   }
 ];
 
+const fakeAccounts = [
+  {
+    id: 1,
+    country: 'vietnam',
+    email: 'thanhquangttq000@gmail.com',
+    address: '94 le hong phong',
+    subDomain: 'quang',
+    status: 'NEW',
+    createdAt: 1613197314216
+  },
+  {
+    id: 2,
+    country: 'vietnam',
+    email: 'thanhquangttq000@gmail.com',
+    address: '94 le hong phong',
+    subDomain: 'quang',
+    status: 'NEW',
+    createdAt: 1613197314216
+  },
+  {
+    id: 3,
+    country: 'vietnam',
+    email: 'thanhquangttq000@gmail.com',
+    address: '94 le hong phong',
+    subDomain: 'quang',
+    status: 'NEW',
+    createdAt: 1613197314216
+  }
+];
+
 function AccountGrid({ t, utils, changeLayout, objectPageRef, forwardedRef }) {
   const gridApi = useRef();
   const dispatch = useDispatch();
-  const accounts = useSelector(state =>
-    state.account.accounts.map(acc => {
-      acc.createdAt = utils.formatDate(acc.createdAt);
-      acc.country = 'Viet Nam';
-      return acc;
-    })
-  );
-
-  console.log(accounts);
+  // const accounts = useSelector(state =>
+  //   state.account.accounts.map(acc => {
+  //     acc.createdAt = utils.formatDate(acc.createdAt);
+  //     acc.country = 'Viet Nam';
+  //     return acc;
+  //   })
+  // );
+  const accounts = fakeAccounts;
 
   const [rowSelection, setRowSelection] = useState('multiple');
 
@@ -98,6 +128,26 @@ function AccountGrid({ t, utils, changeLayout, objectPageRef, forwardedRef }) {
       gridApi.current = params.api;
       params.api.sizeColumnsToFit();
     },
+    actions: [
+      {
+        icon: 'add',
+        text: 'Add',
+        tooltip: 'Add new row',
+        onItemClick: () => {}
+      },
+      {
+        icon: 'edit',
+        text: 'Edit',
+        tooltip: 'Edit a existed row',
+        onItemClick: () => {}
+      },
+      {
+        icon: 'delete',
+        text: 'Delete',
+        tooltip: 'Delete a existed row',
+        onItemClick: () => {}
+      }
+    ],
     columnDefs: JSON.parse(JSON.stringify(accountSchema)).map(i => {
       i.headerName = t(i.headerName);
       if (i.field === 'id') {
@@ -120,10 +170,7 @@ function AccountGrid({ t, utils, changeLayout, objectPageRef, forwardedRef }) {
     },
     allowDragFromColumnsToolPanel: true
   };
-
-  return (
-    <AgGridReact {...gridOptions} style={{ overflowX: 'hidden' }}></AgGridReact>
-  );
+  return <QTable gridOptions={gridOptions}></QTable>;
 }
 
 export default AccountGrid;
