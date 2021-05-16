@@ -1,5 +1,5 @@
 import '@coreui/coreui/dist/css/coreui.min.css';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, BrowserRouter } from 'react-router-dom';
 import React, { Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { icons } from './asset/icon';
@@ -18,11 +18,11 @@ React.icons = icons;
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <Suspense fallback={loading}>
         <App />
       </Suspense>
-    </HashRouter>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
