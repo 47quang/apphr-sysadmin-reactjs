@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import styleReducer from './style';
 import userReducer from './user';
-import accountReducer from './account';
+import merchantReduce from './merchant';
+import provinceReduce from './province';
 
 export default combineReducers({
   style: styleReducer,
   user: userReducer,
-  account: accountReducer
+  merchant: merchantReduce,
+  province: provinceReduce,
 });

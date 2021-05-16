@@ -1,10 +1,10 @@
 import client from './client';
 
-const AccountApi = {
-  getAccounts(params) {
+const MerchantApi = {
+  fetchMerchant(params) {
     return new Promise((resolve, reject) => {
       client
-        .get('/merchant', { params })
+        .get('/api.tenant', { params })
         .then(data => {
           resolve(data);
         })
@@ -15,4 +15,4 @@ const AccountApi = {
   }
 };
 
-export default AccountApi;
+export default MerchantApi;

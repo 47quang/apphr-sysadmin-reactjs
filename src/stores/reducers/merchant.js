@@ -1,12 +1,13 @@
-import { SET_ACCOUNT } from '../actions/account';
+import { SET_MERCHANT } from '../actions/merchant';
 
 const initialState = {
-  accounts: []
+  merchants: [],
+  merchant: {},
 };
 
 export default function (state = initialState, { type, payload }) {
   switch (type) {
-    case SET_ACCOUNT:
+    case SET_MERCHANT:
       return { ...state, ...payload };
     default:
       return state;
