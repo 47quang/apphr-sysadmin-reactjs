@@ -14,10 +14,11 @@ import {
   CRow,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 const Login = (props) => {
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
   if (token) {
     return (
@@ -32,6 +33,8 @@ const Login = (props) => {
 
   function handleLogin() {
     // call api login
+    localStorage.setItem('token', JSON.stringify('system_admin'));
+    dispatch({ type: 'SET_TOKEN', payload: 'system_admin'});
   }
 
   return (
