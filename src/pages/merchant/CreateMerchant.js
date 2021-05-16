@@ -42,6 +42,7 @@ function CreateMerchant(props) {
   const provinces = useSelector(state => state.province.provinces);
   const districts = useSelector(state => state.province.districts);
   const wards = useSelector(state => state.province.wards);
+
   useEffect(() => {
     dispatch(fetchProvinces());
   }, []);
@@ -54,11 +55,9 @@ function CreateMerchant(props) {
     dispatch(fetchWards({ id: state.districtId }));
   }, [state.provinceId, state.districtId]);
 
-  console.log('render');
-
   return (
     <CCard>
-      <CCardHeader>Create Merchant</CCardHeader>
+      <CCardHeader><h2>Create Merchant</h2></CCardHeader>
       <CCardBody>
         <CRow>
           <CCol xs="6">
@@ -89,7 +88,7 @@ function CreateMerchant(props) {
           </CCol>
         </CRow>
         <CRow>
-          <CCol xs="4">
+          <CCol xs="6">
             <CFormGroup>
               <CLabel htmlFor="username">Username</CLabel>
               <CInput
@@ -99,7 +98,7 @@ function CreateMerchant(props) {
               />
             </CFormGroup>
           </CCol>
-          <CCol xs="4">
+          <CCol xs="6">
             <CFormGroup>
               <CLabel htmlFor="password">Password</CLabel>
               <CInput
@@ -109,27 +108,23 @@ function CreateMerchant(props) {
               />
             </CFormGroup>
           </CCol>
-          <CCol xs="4">
-            <CFormGroup>
-              <CLabel htmlFor="email">Email</CLabel>
-              <CInput id="email" placeholder="Enter your email" required />
-            </CFormGroup>
-          </CCol>
         </CRow>
         <CRow>
-          <CCol xs="4">
+          <CCol xs="6">
             <CFormGroup>
               <CLabel htmlFor="address">Address</CLabel>
               <CInput id="address" placeholder="Enter your address" required />
             </CFormGroup>
           </CCol>
-          <CCol xs="4">
+          <CCol xs="6">
             <CFormGroup>
               <CLabel htmlFor="phone">Phone</CLabel>
               <CInput id="phone" placeholder="Enter your phone" required />
             </CFormGroup>
           </CCol>
-          <CCol xs="4">
+        </CRow>
+        <CRow>
+          <CCol xs="6">
             <CFormGroup>
               <CLabel htmlFor="tax-code">Tax code</CLabel>
               <CInput
@@ -137,6 +132,30 @@ function CreateMerchant(props) {
                 placeholder="Enter your tax code"
                 required
               />
+            </CFormGroup>
+          </CCol>
+          <CCol xs="6">
+            <CFormGroup>
+              <CLabel htmlFor="email">Email</CLabel>
+              <CInput id="email" placeholder="Enter your email" required />
+            </CFormGroup>
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol xs="6">
+            <CFormGroup>
+              <CLabel htmlFor="logo">Logo link</CLabel>
+              <CInput
+                id="logo"
+                placeholder="Enter your logo link"
+                required
+              />
+            </CFormGroup>
+          </CCol>
+          <CCol xs="6">
+            <CFormGroup>
+              <CLabel htmlFor="sub-account">Amount of sub account</CLabel>
+              <CInput id="sub-account" placeholder="Enter your amount of sub account" required />
             </CFormGroup>
           </CCol>
         </CRow>
@@ -193,9 +212,7 @@ function CreateMerchant(props) {
                 custom
                 name="ward"
                 id="ward"
-                onChange={e =>
-                  setState({ ...state, wardId: e.target.value })
-                }
+                onChange={e => setState({ ...state, wardId: e.target.value })}
               >
                 <option key={0} value={0}>
                   Select ward
