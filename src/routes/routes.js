@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Dashboard = React.lazy(() => import('@Page/dashboard/Dashboard'));
-const Merchant = React.lazy(() => import('@Page/merchant/index'));
+const Merchant = React.lazy(() => import('@Page/merchant/Merchant'));
 const Notification = React.lazy(() => import('@Page/notification/Notification'));
 const Package = React.lazy(() => import('@Page/package/Package'));
 const Mail = React.lazy(() => import('@Page/mail/Mail'));

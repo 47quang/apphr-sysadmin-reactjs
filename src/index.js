@@ -1,11 +1,11 @@
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
-import App from './App.js';
-import { Provider } from 'react-redux';
-import store from './stores/store';
-import { icons } from './asset/icon';
 import '@coreui/coreui/dist/css/coreui.min.css';
+import { HashRouter } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { Provider } from 'react-redux';
+import { icons } from './asset/icon';
+import store from './stores/store';
+import ReactDOM from 'react-dom';
+import App from './App.js';
 import './i18n/i18n';
 
 const loading = (

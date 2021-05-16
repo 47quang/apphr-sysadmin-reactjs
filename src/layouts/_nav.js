@@ -16,8 +16,8 @@ const _nav = [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Account',
-    to: '/account',
+    name: 'Merchant',
+    to: '/merchant',
     icon: 'cil-pencil',
   },
   {
