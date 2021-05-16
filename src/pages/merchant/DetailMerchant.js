@@ -23,7 +23,7 @@ import {
 import { createMerchant } from '../../stores/actions/merchant';
 import utils from '../../utils';
 
-function CreateMerchant(props) {
+function DetailMerchant(props) {
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -66,14 +66,14 @@ function CreateMerchant(props) {
     props.history.back();
   }
 
-  function create() {
+  function update() {
     dispatch(createMerchant(state));
   }
 
   return (
     <CCard>
       <CCardHeader>
-        <h2>Create Merchant</h2>
+        <h2>Update Merchant</h2>
       </CCardHeader>
       <CCardBody>
         <CRow>
@@ -298,11 +298,11 @@ function CreateMerchant(props) {
           style={{ background: '#555e6d', color: 'white', marginLeft: '40px' }}
           onClick={create}
         >
-          Tạo mới
+          Cập nhật
         </CButton>
       </CCardFooter>
     </CCard>
   );
 }
 
-export default CreateMerchant;
+export default DetailMerchant;

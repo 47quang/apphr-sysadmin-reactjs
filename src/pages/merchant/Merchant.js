@@ -9,11 +9,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
 import React, { useEffect } from 'react';
+import { CButton, CIcon } from '@coreui/react';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: '#3c4b64',
-    color: theme.palette.common.white
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.common.black
   },
   body: {
     fontSize: 14
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Merchant() {
+function Merchant(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const merchants = useSelector(state => state.merchant.merchants);
@@ -47,27 +48,32 @@ function Merchant() {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Id</StyledTableCell>
-              <StyledTableCell>Code</StyledTableCell>
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell>Username</StyledTableCell>
-              <StyledTableCell>Phone</StyledTableCell>
-              <StyledTableCell>Email</StyledTableCell>
-              <StyledTableCell>Address</StyledTableCell>
-              <StyledTableCell>Tax Code</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Id</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Code</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Name</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Username</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Phone</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Email</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Address</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Tax Code</StyledTableCell>
+              <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {merchants.map(row => (
-              <StyledTableRow key={row.id}>
-                <StyledTableCell component="th" scope="row">{row.id}</StyledTableCell>
-                <StyledTableCell>{row.code}</StyledTableCell>
-                <StyledTableCell>{row.name}</StyledTableCell>
-                <StyledTableCell>{row.username}</StyledTableCell>
-                <StyledTableCell>{row.phone}</StyledTableCell>
-                <StyledTableCell>{row.email}</StyledTableCell>
-                <StyledTableCell>{row.address}</StyledTableCell>
-                <StyledTableCell>{row.taxCode}</StyledTableCell>
+              <StyledTableRow key={row.id} style={{boxSizing: 'border-box'}}>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}} component="th" scope="row">{row.id}</StyledTableCell>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>{row.code}</StyledTableCell>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>{row.name}</StyledTableCell>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>{row.username}</StyledTableCell>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>{row.phone}</StyledTableCell>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>{row.email}</StyledTableCell>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>{row.address}</StyledTableCell>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>{row.taxCode}</StyledTableCell>
+                <StyledTableCell style={{border: '1px solid #d4d3d3', boxSizing: 'border-box'}}>
+                 <CButton size="sm" className="btn-facebook btn-brand mr-1" onClick={() => props.history.push(`merchant/${row.id}`)}>View</CButton>
+                 <CButton size="sm" className="btn-youtube btn-brand mr-1">Delete</CButton>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
