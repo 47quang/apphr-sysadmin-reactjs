@@ -22,3 +22,7 @@
 :host .ui5-shellbar-root {
   padding: 0.25rem 0.5rem !important;
 }
+
+.c-body {
+  background: #f5f5f5 !important;
+}

@@ -20,10 +20,17 @@ import {
   fetchProvinces,
   fetchWards
 } from '../../stores/actions/province';
-import { createMerchant } from '../../stores/actions/merchant';
+import { getMerchant, updateMerchant } from '../../stores/actions/merchant';
 import utils from '../../utils';
 
 function DetailMerchant(props) {
+  
+  const dispatch = useDispatch();
+  const merchant = useSelector(state => state.merchant.merchant);
+  const provinces = useSelector(state => state.province.provinces);
+  const districts = useSelector(state => state.province.districts);
+  const wards = useSelector(state => state.province.wards);
+
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -41,14 +48,14 @@ function DetailMerchant(props) {
     amountOfAccount: 10
   });
 
-  const dispatch = useDispatch();
-  const provinces = useSelector(state => state.province.provinces);
-  const districts = useSelector(state => state.province.districts);
-  const wards = useSelector(state => state.province.wards);
-
   useEffect(() => {
+    dispatch(getMerchant(props.match.params));
     dispatch(fetchProvinces());
   }, []);
+
+  useEffect(() => {
+    setState({...state, ...merchant});
+  }, [merchant.id]);
 
   useEffect(() => {
     dispatch(fetchDistricts({ id: state.provinceId }));
@@ -63,11 +70,11 @@ function DetailMerchant(props) {
   }
 
   function back() {
-    props.history.back();
+    props.history.goBack();
   }
 
   function update() {
-    dispatch(createMerchant(state));
+    dispatch(updateMerchant(state));
   }
 
   return (
@@ -118,6 +125,7 @@ function DetailMerchant(props) {
                 id="username"
                 placeholder="Enter your username"
                 required
+                disabled
                 value={state.username}
                 onChange={e => setState({ ...state, username: e.target.value })}
               />
@@ -131,6 +139,7 @@ function DetailMerchant(props) {
                 id="password"
                 placeholder="Enter your password"
                 required
+                disabled
                 value={state.password}
                 onChange={e => setState({ ...state, password: e.target.value })}
               />
@@ -225,7 +234,7 @@ function DetailMerchant(props) {
                 custom
                 name="province"
                 id="province"
-                defaultValue={state.provinceId}
+                value={state.provinceId}
                 onChange={e =>
                   setState({ ...state, provinceId: e.target.value })
                 }
@@ -248,6 +257,7 @@ function DetailMerchant(props) {
                 custom
                 name="district"
                 id="district"
+                value={state.districtId}
                 onChange={e =>
                   setState({ ...state, districtId: e.target.value })
                 }
@@ -270,6 +280,7 @@ function DetailMerchant(props) {
                 custom
                 name="ward"
                 id="ward"
+                value={state.wardId}
                 onChange={e => setState({ ...state, wardId: e.target.value })}
               >
                 <option key={0} value={0}>
@@ -291,14 +302,14 @@ function DetailMerchant(props) {
           style={{ background: '#555e6d', color: 'white' }}
           onClick={back}
         >
-          Quay về
+          Back
         </CButton>
         <CButton
           size="md"
           style={{ background: '#555e6d', color: 'white', marginLeft: '40px' }}
-          onClick={create}
+          onClick={update}
         >
-          Cập nhật
+          Update
         </CButton>
       </CCardFooter>
     </CCard>

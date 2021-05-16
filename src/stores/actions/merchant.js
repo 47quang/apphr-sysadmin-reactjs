@@ -15,9 +15,7 @@ export function setMerchants(merchants) {
 export function setMerchant(merchant) {
   return {
     type: SET_MERCHANT,
-    payload: {
-      merchant
-    }
+    payload: merchant
   }
 }
 
@@ -33,7 +31,7 @@ export function fetchMerchants(params) {
 }
 
 
-export function createMerchant(payload) {
+export function createMerchant(payload, props) {
   payload.provinceId = +payload.provinceId;
   payload.districtId = +payload.districtId;
   payload.wardId = +payload.wardId;
@@ -42,6 +40,9 @@ export function createMerchant(payload) {
       .createMerchant(payload)
       .then(resp => {
         dispatch(setMerchant(resp.payload));
+        if (props) {
+          props.history.push(`/merchant/${resp.payload.id}`);
+        }
       })
       .catch(err => console.log(err));
   };

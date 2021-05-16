@@ -3,14 +3,14 @@ import { TheContent, TheSidebar, TheFooter, TheHeader } from './index';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-const TheLayout = ({ location }) => {
+const TheLayout = (props) => {
   const token = useSelector((state) => state.user.token);
   if (!token) {
     return (
       <Redirect
         to={{
           pathname: '/login',
-          state: { from: location },
+          state: { from: props.location },
         }}
       />
     );
@@ -21,7 +21,7 @@ const TheLayout = ({ location }) => {
       <div className="c-wrapper">
         <TheHeader />
         <div className="c-body">
-          <TheContent />
+          <TheContent {...props} />
         </div>
         {/* <TheFooter /> */}
       </div>

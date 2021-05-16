@@ -63,11 +63,11 @@ function CreateMerchant(props) {
   }
 
   function back() {
-    props.history.back();
+    props.history.goBack();
   }
 
   function create() {
-    dispatch(createMerchant(state));
+    dispatch(createMerchant(state, props));
   }
 
   return (
@@ -225,7 +225,7 @@ function CreateMerchant(props) {
                 custom
                 name="province"
                 id="province"
-                defaultValue={state.provinceId}
+                value={state.provinceId}
                 onChange={e =>
                   setState({ ...state, provinceId: e.target.value })
                 }
@@ -248,6 +248,7 @@ function CreateMerchant(props) {
                 custom
                 name="district"
                 id="district"
+                value={state.districtId}
                 onChange={e =>
                   setState({ ...state, districtId: e.target.value })
                 }
@@ -270,6 +271,7 @@ function CreateMerchant(props) {
                 custom
                 name="ward"
                 id="ward"
+                value={state.wardId}
                 onChange={e => setState({ ...state, wardId: e.target.value })}
               >
                 <option key={0} value={0}>
@@ -291,14 +293,14 @@ function CreateMerchant(props) {
           style={{ background: '#555e6d', color: 'white' }}
           onClick={back}
         >
-          Quay về
+          Back
         </CButton>
         <CButton
           size="md"
           style={{ background: '#555e6d', color: 'white', marginLeft: '40px' }}
           onClick={create}
         >
-          Tạo mới
+          Create
         </CButton>
       </CCardFooter>
     </CCard>

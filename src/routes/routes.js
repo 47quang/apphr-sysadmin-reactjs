@@ -12,8 +12,8 @@ const Mail = React.lazy(() => import('@Page/mail/Mail'));
 const routes = [
   { path: '/', exact: true, component: Dashboard },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/merchant/:id', name: 'DetailMerchant', component: DetailMerchant },
   { path: '/merchant/create', name: 'CreateMerchant', component: CreateMerchant },
+  { path: '/merchant/:id', name: 'DetailMerchant', component: DetailMerchant },
   { path: '/merchant', name: 'Merchant', component: Merchant },
   { path: '/notification', name: 'Notification', component: Notification },
   { path: '/package', name: 'Package', component: Package },

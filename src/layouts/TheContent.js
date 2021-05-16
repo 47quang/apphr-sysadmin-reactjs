@@ -12,7 +12,7 @@ const loading = (
   </div>
 );
 
-const TheContent = ({ t, i18n }) => {
+const TheContent = ({ t, i18n, location, history }) => {
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -28,7 +28,7 @@ const TheContent = ({ t, i18n }) => {
                     name={route.name}
                     render={(props) => (
                       <CFade>
-                        <route.component utils={utils} t={t} i18n={i18n} {...props} />
+                        <route.component utils={utils} t={t} location={location} history={history} i18n={i18n} {...props} />
                       </CFade>
                     )}
                   />

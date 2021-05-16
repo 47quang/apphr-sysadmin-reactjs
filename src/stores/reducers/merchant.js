@@ -8,6 +8,7 @@ const initialState = {
 export default function (state = initialState, { type, payload }) {
   switch (type) {
     case SET_MERCHANT:
+      return { ...state, merchant: payload };
     case SET_MERCHANTS:
       return { ...state, ...payload };
     default:
