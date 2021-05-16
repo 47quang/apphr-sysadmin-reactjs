@@ -5,25 +5,25 @@ const _nav = [
   {
     _tag: 'CSidebarNavItem',
     name: 'Dashboard',
-    to: '/dashboard',
+    to: '/sysadmin/dashboard',
     icon: 'cil-speedometer',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Package',
-    to: '/package',
+    to: '/sysadmin/package',
     icon: 'cil-touch-app',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Merchant',
-    to: '/merchant',
+    to: '/sysadmin/merchant',
     icon: 'cil-pencil',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Mail',
-    to: '/mail',
+    to: '/sysadmin/mail',
     icon: 'cil-bell',
   },
 ];
