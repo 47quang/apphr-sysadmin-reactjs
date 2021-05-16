@@ -1,7 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { withTranslation } from 'react-i18next';
-import { ThemeProvider } from '@ui5/webcomponents-react/lib/ThemeProvider';
 import './styles/css/app.css';
 import './styles/scss/style.scss';
 
@@ -12,7 +10,6 @@ const TheLayout = React.lazy(() => import('@Layout/TheLayout'));
 
 function App() {
   return (
-    <ThemeProvider>
       <Switch>
         <Route
           exact
@@ -37,7 +34,6 @@ function App() {
           render={props => <TheLayout {...props} />}
         />
       </Switch>
-    </ThemeProvider>
   );
 }
 

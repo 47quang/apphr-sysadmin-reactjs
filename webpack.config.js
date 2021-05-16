@@ -48,6 +48,10 @@ module.exports = {
       '@Layout': path.resolve(__dirname, './src/layouts'),
       '@Api': path.resolve(__dirname, './src/stores/apis'),
       '@Action': path.resolve(__dirname, './src/stores/actions')
+    },
+    fallback: {
+      'stream': require.resolve('stream-browserify'),
+      'buffer': require.resolve('buffer/')
     }
   },
   optimization: {
