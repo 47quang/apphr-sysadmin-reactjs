@@ -11,26 +11,14 @@ import {
   CSidebarNavItem
 } from '@coreui/react';
 import nav from './_nav';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 const TheSidebar = () => {
   const navigation = JSON.parse(JSON.stringify(nav));
-  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const show = useSelector(state => state.style.sidebarShow);
 
-  function changeName(tree) {
-    if (tree.name) {
-      tree.name = t(tree.name);
-    }
-    if (tree._children) {
-      for (const child of tree._children) {
-        changeName(child);
-      }
-    }
-  }
   return (
     <CSidebar
       show={show}
@@ -46,7 +34,7 @@ const TheSidebar = () => {
       <CSidebarNav>
         <CCreateElement
           items={navigation.map(i => {
-            changeName(i);
+            // changeName(i);
             return i;
           })}
           components={{

@@ -71,9 +71,9 @@ function CreateMerchant(props) {
   }
 
   return (
-    <CCard>
+    <CCard style={{width: '60%', margin: 'auto'}}>
       <CCardHeader>
-        <h2>Create Merchant</h2>
+        <h4 style={{margin: 0}}>Create Merchant</h4>
       </CCardHeader>
       <CCardBody>
         <CRow>
@@ -287,17 +287,17 @@ function CreateMerchant(props) {
           </CCol>
         </CRow>
       </CCardBody>
-      <CCardFooter>
+      <CCardFooter style={{position: 'relative', height: 60}}>
         <CButton
           size="md"
-          style={{ background: '#555e6d', color: 'white' }}
+          style={{ background: '#555e6d', color: 'white', position: 'absolute', left: 20 }}
           onClick={back}
         >
           Back
         </CButton>
         <CButton
           size="md"
-          style={{ background: '#555e6d', color: 'white', marginLeft: '40px' }}
+          style={{ background: '#555e6d', color: 'white', position: 'absolute', right: 20}}
           onClick={create}
         >
           Create

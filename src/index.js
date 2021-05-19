@@ -1,12 +1,11 @@
 import '@coreui/coreui/dist/css/coreui.min.css';
-import { HashRouter, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import React, { Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { icons } from './asset/icon';
 import store from './stores/store';
 import ReactDOM from 'react-dom';
 import App from './App.js';
-import './i18n/i18n';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -18,11 +17,11 @@ React.icons = icons;
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <Suspense fallback={loading}>
         <App />
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );

@@ -5,14 +5,13 @@ import utils from '@Util/index';
 
 // routes config
 import routes from '@Route/routes';
-import { withTranslation } from 'react-i18next';
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
   </div>
 );
 
-const TheContent = ({ t, i18n, location, history }) => {
+const TheContent = ({ location, history }) => {
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -28,7 +27,7 @@ const TheContent = ({ t, i18n, location, history }) => {
                     name={route.name}
                     render={(props) => (
                       <CFade>
-                        <route.component utils={utils} t={t} location={location} history={history} i18n={i18n} {...props} />
+                        <route.component utils={utils} location={location} history={history} {...props} />
                       </CFade>
                     )}
                   />
@@ -43,4 +42,4 @@ const TheContent = ({ t, i18n, location, history }) => {
   );
 };
 
-export default React.memo(withTranslation()(TheContent));
+export default TheContent;
