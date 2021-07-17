@@ -24,7 +24,6 @@ import { getMerchant, updateMerchant } from '../../stores/actions/merchant';
 import utils from '../../utils';
 
 function DetailMerchant(props) {
-  
   const dispatch = useDispatch();
   const merchant = useSelector(state => state.merchant.merchant);
   const provinces = useSelector(state => state.province.provinces);
@@ -54,7 +53,7 @@ function DetailMerchant(props) {
   }, []);
 
   useEffect(() => {
-    setState({...state, ...merchant});
+    setState({ ...state, ...merchant });
   }, [merchant.id]);
 
   useEffect(() => {
@@ -77,19 +76,25 @@ function DetailMerchant(props) {
     dispatch(updateMerchant(state));
   }
 
+  const mapProvince = p => (
+    <option key={p.id} value={p.id}>
+      {p.name}
+    </option>
+  );
+
   return (
-    <CCard style={{width: '60%', margin: 'auto'}}>
+    <CCard style={{ width: '60%', margin: 'auto' }}>
       <CCardHeader>
-        <h4 style={{margin: 0}}>Update Merchant</h4>
+        <h4 style={{ margin: 0 }}>Thông tin doanh nghiệp</h4>
       </CCardHeader>
       <CCardBody>
         <CRow>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="merchant-name">Merchant name</CLabel>
+              <CLabel htmlFor="merchant-name">Tên doanh nghiệp</CLabel>
               <CInput
                 id="merchant-name"
-                placeholder="Enter your merchant name"
+                placeholder="Nhập tên doanh nghiệp"
                 required
                 value={state.name}
                 onChange={e => setState({ ...state, name: e.target.value })}
@@ -98,19 +103,19 @@ function DetailMerchant(props) {
           </CCol>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="merchant-code">Merchant code</CLabel>
+              <CLabel htmlFor="merchant-code">Tên viết tắt</CLabel>
               <CInputGroup>
                 <CInput
                   id="merchant-code"
                   size="16"
                   type="text"
-                  placeholder="Enter your merchant code"
+                  placeholder="Nhập tên viết tắt"
                   value={state.code}
                   onChange={e => setState({ ...state, code: e.target.value })}
                 />
                 <CInputGroupAppend>
                   <CButton color="secondary" onClick={randomCode}>
-                    Random
+                    Ngẫu nhiên
                   </CButton>
                 </CInputGroupAppend>
               </CInputGroup>
@@ -123,7 +128,7 @@ function DetailMerchant(props) {
               <CLabel htmlFor="username">Username</CLabel>
               <CInput
                 id="username"
-                placeholder="Enter your username"
+                placeholder=""
                 required
                 disabled
                 value={state.username}
@@ -133,11 +138,11 @@ function DetailMerchant(props) {
           </CCol>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="password">Password</CLabel>
+              <CLabel htmlFor="password">Mật khẩu</CLabel>
               <CInput
                 type="password"
                 id="password"
-                placeholder="Enter your password"
+                placeholder=""
                 required
                 disabled
                 value={state.password}
@@ -149,10 +154,10 @@ function DetailMerchant(props) {
         <CRow>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="address">Address</CLabel>
+              <CLabel htmlFor="address">Địa chỉ</CLabel>
               <CInput
                 id="address"
-                placeholder="Enter your address"
+                placeholder="Nhập địa chỉ"
                 required
                 value={state.address}
                 onChange={e => setState({ ...state, address: e.target.value })}
@@ -161,10 +166,10 @@ function DetailMerchant(props) {
           </CCol>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="phone">Phone</CLabel>
+              <CLabel htmlFor="phone">Số điện thoại</CLabel>
               <CInput
                 id="phone"
-                placeholder="Enter your phone"
+                placeholder="Nhập số điện thoại"
                 required
                 value={state.phone}
                 onChange={e => setState({ ...state, phone: e.target.value })}
@@ -175,10 +180,10 @@ function DetailMerchant(props) {
         <CRow>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="tax-code">Tax code</CLabel>
+              <CLabel htmlFor="tax-code">Mã số thuế</CLabel>
               <CInput
                 id="tax-code"
-                placeholder="Enter your tax code"
+                placeholder="Nhập mã số thuế"
                 required
                 value={state.taxCode}
                 onChange={e => setState({ ...state, taxCode: e.target.value })}
@@ -190,7 +195,7 @@ function DetailMerchant(props) {
               <CLabel htmlFor="email">Email</CLabel>
               <CInput
                 id="email"
-                placeholder="Enter your email"
+                placeholder="Nhập email"
                 required
                 value={state.email}
                 onChange={e => setState({ ...state, email: e.target.value })}
@@ -199,9 +204,9 @@ function DetailMerchant(props) {
           </CCol>
         </CRow>
         <CRow>
-          <CCol xs="6">
+          {/* <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="logo">Logo link</CLabel>
+              <CLabel htmlFor="logo"></CLabel>
               <CInput
                 id="logo"
                 placeholder="Enter your logo link"
@@ -210,13 +215,13 @@ function DetailMerchant(props) {
                 onChange={e => setState({ ...state, logo: e.target.value })}
               />
             </CFormGroup>
-          </CCol>
+          </CCol> */}
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="sub-account">Amount of sub account</CLabel>
+              <CLabel htmlFor="sub-account">Số lượng tài khoản</CLabel>
               <CInput
                 id="sub-account"
-                placeholder="Enter your amount of sub account"
+                placeholder="Nhập số lượng tài khoản"
                 required
                 value={state.amountOfAccount}
                 onChange={e =>
@@ -229,7 +234,7 @@ function DetailMerchant(props) {
         <CRow>
           <CCol xs="4">
             <CFormGroup>
-              <CLabel htmlFor="province">Province</CLabel>
+              <CLabel htmlFor="province">Tỉnh/Thành phố</CLabel>
               <CSelect
                 custom
                 name="province"
@@ -240,19 +245,15 @@ function DetailMerchant(props) {
                 }
               >
                 <option key={0} value={0}>
-                  Select province
+                  Chọn tỉnh
                 </option>
-                {provinces.map(p => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
-                ))}
+                {provinces.map(mapProvince)}
               </CSelect>
             </CFormGroup>
           </CCol>
           <CCol xs="4">
             <CFormGroup>
-              <CLabel htmlFor="district">District</CLabel>
+              <CLabel htmlFor="district">Quận/Huyện</CLabel>
               <CSelect
                 custom
                 name="district"
@@ -263,19 +264,15 @@ function DetailMerchant(props) {
                 }
               >
                 <option key={0} value={0}>
-                  Select district
+                  Chọn quận/huyện
                 </option>
-                {districts.map(p => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
-                ))}
+                {districts.map(mapProvince)}
               </CSelect>
             </CFormGroup>
           </CCol>
           <CCol xs="4">
             <CFormGroup>
-              <CLabel htmlFor="ward">Ward</CLabel>
+              <CLabel htmlFor="ward">Phường/xã/Thị trấn</CLabel>
               <CSelect
                 custom
                 name="ward"
@@ -284,32 +281,38 @@ function DetailMerchant(props) {
                 onChange={e => setState({ ...state, wardId: e.target.value })}
               >
                 <option key={0} value={0}>
-                  Select ward
+                  Chọn phường,xã,thị trấn
                 </option>
-                {wards.map(p => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
-                ))}
+                {wards.map(mapProvince)}
               </CSelect>
             </CFormGroup>
           </CCol>
         </CRow>
       </CCardBody>
-      <CCardFooter style={{position: 'relative', height: 60}}>
+      <CCardFooter style={{ position: 'relative', height: 60 }}>
         <CButton
           size="md"
-          style={{ background: '#555e6d', color: 'white', position: 'absolute', left: 20 }}
+          style={{
+            background: '#555e6d',
+            color: 'white',
+            position: 'absolute',
+            left: 20
+          }}
           onClick={back}
         >
-          Back
+          Quay về
         </CButton>
         <CButton
           size="md"
-          style={{ background: '#555e6d', color: 'white', position: 'absolute', right: 20}}
+          style={{
+            background: '#555e6d',
+            color: 'white',
+            position: 'absolute',
+            right: 20
+          }}
           onClick={update}
         >
-          Update
+          Cập nhật
         </CButton>
       </CCardFooter>
     </CCard>
