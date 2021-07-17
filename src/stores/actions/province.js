@@ -19,7 +19,7 @@ export function setDistricts(districts) {
     payload: {
       districts
     }
-  }
+  };
 }
 
 export function setWards(wards) {
@@ -28,38 +28,35 @@ export function setWards(wards) {
     payload: {
       wards
     }
-  }
+  };
 }
 
 export function fetchProvinces(params) {
   return (dispatch, getState) => {
-    ProvinceApi
-      .fetchProvinces(params)
+    ProvinceApi.fetchProvinces(params)
       .then(resp => {
         dispatch(setProvinces(resp.payload));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.debug(err));
   };
 }
 
 export function fetchDistricts(params) {
   return (dispatch, getState) => {
-    ProvinceApi
-      .fetchDistricts(params)
+    ProvinceApi.fetchDistricts(params)
       .then(resp => {
         dispatch(setDistricts(resp.payload));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.debug(err));
   };
 }
 
 export function fetchWards(params) {
   return (dispatch, getState) => {
-    ProvinceApi
-      .fetchWards(params)
+    ProvinceApi.fetchWards(params)
       .then(resp => {
         dispatch(setWards(resp.payload));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.debug(err));
   };
 }

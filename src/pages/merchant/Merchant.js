@@ -1,5 +1,5 @@
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { fetchMerchants } from '../../stores/actions/merchant';
+import { deleteMerchant, fetchMerchants } from '../../stores/actions/merchant';
 import TableContainer from '@material-ui/core/TableContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import TableBody from '@material-ui/core/TableBody';
@@ -42,6 +42,9 @@ function Merchant(props) {
   useEffect(() => {
     dispatch(fetchMerchants());
   }, []);
+  // function delMerchant(id) {
+  //   dispatch(deleteMerchant(id));
+  // }
   return (
     <div>
       <TableContainer component={Paper}>
@@ -87,6 +90,11 @@ function Merchant(props) {
                 style={{ border: '1px solid #d4d3d3', boxSizing: 'border-box' }}
               >
                 Mã số thuế
+              </StyledTableCell>
+              <StyledTableCell
+                style={{ border: '1px solid #d4d3d3', boxSizing: 'border-box' }}
+              >
+                Trạng thái kích hoạt
               </StyledTableCell>
               <StyledTableCell
                 style={{ border: '1px solid #d4d3d3', boxSizing: 'border-box' }}
@@ -167,6 +175,16 @@ function Merchant(props) {
                 <StyledTableCell
                   style={{
                     border: '1px solid #d4d3d3',
+                    boxSizing: 'border-box',
+                    color: `${row.isActive ? 'green' : 'red'}`,
+                    fontWeight: 'bold'
+                  }}
+                >
+                  {row.isActive ? 'Đã kích hoạt' : 'Chưa kích hoạt'}
+                </StyledTableCell>
+                <StyledTableCell
+                  style={{
+                    border: '1px solid #d4d3d3',
                     boxSizing: 'border-box'
                   }}
                 >
@@ -177,9 +195,13 @@ function Merchant(props) {
                   >
                     Xem
                   </CButton>
-                  <CButton size="sm" className="btn-youtube btn-brand mr-1">
+                  {/* <CButton
+                    size="sm"
+                    className="btn-youtube btn-brand mr-1"
+                    onClick={() => delMerchant(row.id)}
+                  >
                     Xóa
-                  </CButton>
+                  </CButton> */}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

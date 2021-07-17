@@ -20,7 +20,11 @@ import {
   fetchProvinces,
   fetchWards
 } from '../../stores/actions/province';
-import { getMerchant, updateMerchant } from '../../stores/actions/merchant';
+import {
+  activateMerchant,
+  getMerchant,
+  updateMerchant
+} from '../../stores/actions/merchant';
 import utils from '../../utils';
 
 function DetailMerchant(props) {
@@ -30,7 +34,7 @@ function DetailMerchant(props) {
   const districts = useSelector(state => state.province.districts);
   const wards = useSelector(state => state.province.wards);
 
-  const [state, setState] = useState({
+  const [detail, setDetail] = useState({
     username: '',
     password: '',
     email: '',
@@ -44,7 +48,8 @@ function DetailMerchant(props) {
     address: '',
     note: '',
     logo: '',
-    amountOfAccount: 10
+    amountOfAccount: 10,
+    isActive: false
   });
 
   useEffect(() => {
@@ -53,19 +58,19 @@ function DetailMerchant(props) {
   }, []);
 
   useEffect(() => {
-    setState({ ...state, ...merchant });
-  }, [merchant.id]);
+    setDetail({ ...detail, ...merchant });
+  }, [merchant.id, merchant.isActive]);
 
   useEffect(() => {
-    dispatch(fetchDistricts({ id: state.provinceId }));
-  }, [state.provinceId]);
+    dispatch(fetchDistricts({ id: detail.provinceId }));
+  }, [detail.provinceId]);
 
   useEffect(() => {
-    dispatch(fetchWards({ id: state.districtId }));
-  }, [state.provinceId, state.districtId]);
+    dispatch(fetchWards({ id: detail.districtId }));
+  }, [detail.provinceId, detail.districtId]);
 
   function randomCode() {
-    setState({ ...state, code: utils.generateCode(5, true) });
+    setDetail({ ...detail, code: utils.generateCode(5, true) });
   }
 
   function back() {
@@ -73,14 +78,20 @@ function DetailMerchant(props) {
   }
 
   function update() {
-    dispatch(updateMerchant(state));
+    dispatch(updateMerchant(detail));
   }
 
-  const mapProvince = p => (
-    <option key={p.id} value={p.id}>
-      {p.name}
-    </option>
-  );
+  function mapProvince(p) {
+    return (
+      <option key={p.id} value={p.id}>
+        {p.name}
+      </option>
+    );
+  }
+
+  function onActivate() {
+    dispatch(activateMerchant(detail));
+  }
 
   return (
     <CCard style={{ width: '60%', margin: 'auto' }}>
@@ -96,8 +107,8 @@ function DetailMerchant(props) {
                 id="merchant-name"
                 placeholder="Nhập tên doanh nghiệp"
                 required
-                value={state.name}
-                onChange={e => setState({ ...state, name: e.target.value })}
+                value={detail.name}
+                onChange={e => setDetail({ ...detail, name: e.target.value })}
               />
             </CFormGroup>
           </CCol>
@@ -110,8 +121,8 @@ function DetailMerchant(props) {
                   size="16"
                   type="text"
                   placeholder="Nhập tên viết tắt"
-                  value={state.code}
-                  onChange={e => setState({ ...state, code: e.target.value })}
+                  value={detail.code}
+                  onChange={e => setDetail({ ...detail, code: e.target.value })}
                 />
                 <CInputGroupAppend>
                   <CButton color="secondary" onClick={randomCode}>
@@ -125,54 +136,28 @@ function DetailMerchant(props) {
         <CRow>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="username">Username</CLabel>
+              <CLabel htmlFor="email">Email</CLabel>
               <CInput
-                id="username"
-                placeholder=""
+                id="email"
+                placeholder="Nhập email"
                 required
-                disabled
-                value={state.username}
-                onChange={e => setState({ ...state, username: e.target.value })}
+                value={detail.email}
+                onChange={e => setDetail({ ...detail, email: e.target.value })}
               />
             </CFormGroup>
           </CCol>
+
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="password">Mật khẩu</CLabel>
-              <CInput
-                type="password"
-                id="password"
-                placeholder=""
-                required
-                disabled
-                value={state.password}
-                onChange={e => setState({ ...state, password: e.target.value })}
-              />
-            </CFormGroup>
-          </CCol>
-        </CRow>
-        <CRow>
-          <CCol xs="6">
-            <CFormGroup>
-              <CLabel htmlFor="address">Địa chỉ</CLabel>
-              <CInput
-                id="address"
-                placeholder="Nhập địa chỉ"
-                required
-                value={state.address}
-                onChange={e => setState({ ...state, address: e.target.value })}
-              />
-            </CFormGroup>
-          </CCol>
-          <CCol xs="6">
-            <CFormGroup>
-              <CLabel htmlFor="phone">Số điện thoại</CLabel>
+              <CLabel htmlFor="phone" className="bold">
+                Số điện thoại
+              </CLabel>
               <CInput
                 id="phone"
                 placeholder="Nhập số điện thoại"
                 required
-                value={state.phone}
-                onChange={e => setState({ ...state, phone: e.target.value })}
+                value={detail.phone}
+                onChange={e => setDetail({ ...detail, phone: e.target.value })}
               />
             </CFormGroup>
           </CCol>
@@ -185,20 +170,24 @@ function DetailMerchant(props) {
                 id="tax-code"
                 placeholder="Nhập mã số thuế"
                 required
-                value={state.taxCode}
-                onChange={e => setState({ ...state, taxCode: e.target.value })}
+                value={detail.taxCode}
+                onChange={e =>
+                  setDetail({ ...detail, taxCode: e.target.value })
+                }
               />
             </CFormGroup>
           </CCol>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="email">Email</CLabel>
+              <CLabel htmlFor="address">Địa chỉ</CLabel>
               <CInput
-                id="email"
-                placeholder="Nhập email"
+                id="address"
+                placeholder="Nhập địa chỉ"
                 required
-                value={state.email}
-                onChange={e => setState({ ...state, email: e.target.value })}
+                value={detail.address}
+                onChange={e =>
+                  setDetail({ ...detail, address: e.target.value })
+                }
               />
             </CFormGroup>
           </CCol>
@@ -211,11 +200,29 @@ function DetailMerchant(props) {
                 id="logo"
                 placeholder="Enter your logo link"
                 required
-                value={state.logo}
-                onChange={e => setState({ ...state, logo: e.target.value })}
+                value={detail.logo}
+                onChange={e => setDetail({ ...detail, logo: e.target.value })}
               />
             </CFormGroup>
           </CCol> */}
+        </CRow>
+
+        <CRow>
+          <CCol xs="6">
+            <CFormGroup>
+              <CLabel htmlFor="username">Username</CLabel>
+              <CInput
+                id="username"
+                placeholder=""
+                required
+                disabled
+                value={detail.username}
+                onChange={e =>
+                  setDetail({ ...detail, username: e.target.value })
+                }
+              />
+            </CFormGroup>
+          </CCol>
           <CCol xs="6">
             <CFormGroup>
               <CLabel htmlFor="sub-account">Số lượng tài khoản</CLabel>
@@ -223,9 +230,9 @@ function DetailMerchant(props) {
                 id="sub-account"
                 placeholder="Nhập số lượng tài khoản"
                 required
-                value={state.amountOfAccount}
+                value={detail.amountOfAccount}
                 onChange={e =>
-                  setState({ ...state, amountOfAccount: e.target.value })
+                  setDetail({ ...detail, amountOfAccount: e.target.value })
                 }
               />
             </CFormGroup>
@@ -239,9 +246,9 @@ function DetailMerchant(props) {
                 custom
                 name="province"
                 id="province"
-                value={state.provinceId}
+                value={detail.provinceId}
                 onChange={e =>
-                  setState({ ...state, provinceId: e.target.value })
+                  setDetail({ ...detail, provinceId: e.target.value })
                 }
               >
                 <option key={0} value={0}>
@@ -258,9 +265,9 @@ function DetailMerchant(props) {
                 custom
                 name="district"
                 id="district"
-                value={state.districtId}
+                value={detail.districtId}
                 onChange={e =>
-                  setState({ ...state, districtId: e.target.value })
+                  setDetail({ ...detail, districtId: e.target.value })
                 }
               >
                 <option key={0} value={0}>
@@ -277,8 +284,8 @@ function DetailMerchant(props) {
                 custom
                 name="ward"
                 id="ward"
-                value={state.wardId}
-                onChange={e => setState({ ...state, wardId: e.target.value })}
+                value={detail.wardId}
+                onChange={e => setDetail({ ...detail, wardId: e.target.value })}
               >
                 <option key={0} value={0}>
                   Chọn phường,xã,thị trấn
@@ -301,6 +308,18 @@ function DetailMerchant(props) {
           onClick={back}
         >
           Quay về
+        </CButton>
+        <CButton
+          size="md"
+          style={{
+            background: `${detail.isActive ? 'red' : '#555e6d'}`,
+            color: 'white',
+            position: 'absolute',
+            right: 120
+          }}
+          onClick={onActivate}
+        >
+          {detail.isActive ? 'Hủy kích hoạt' : 'Kích hoạt'}
         </CButton>
         <CButton
           size="md"
