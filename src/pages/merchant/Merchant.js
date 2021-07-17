@@ -195,13 +195,9 @@ function Merchant(props) {
                   >
                     Xem
                   </CButton>
-                  {/* <CButton
-                    size="sm"
-                    className="btn-youtube btn-brand mr-1"
-                    onClick={() => delMerchant(row.id)}
-                  >
+                  <CButton size="sm" className="btn-youtube btn-brand mr-1">
                     Xóa
-                  </CButton> */}
+                  </CButton>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
