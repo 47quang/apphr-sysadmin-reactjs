@@ -17,11 +17,11 @@ React.icons = icons;
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <Suspense fallback={loading}>
         <App />
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );

@@ -13,23 +13,23 @@ function App() {
       <Switch>
         <Route
           exact
-          path="/sysadmin/login"
+          path="/login"
           name="Login Page"
           render={props => <Login {...props} />}
         />
         <Route
-          path="/sysadmin/404"
+          path="/404"
           name="Page 404"
           render={props => <Page404 {...props} />}
         />
         <Route
           exact
-          path="/sysadmin/500"
+          path="/500"
           name="Page 500"
           render={props => <Page500 {...props} />}
         />
         <Route
-          path="/sysadmin/"
+          path="/"
           name="Home"
           render={props => <TheLayout {...props} />}
         />

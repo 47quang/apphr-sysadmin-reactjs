@@ -3,7 +3,7 @@ const _nav = [
   {
     _tag: 'CSidebarNavItem',
     name: 'Merchant',
-    to: '/sysadmin/merchant',
+    to: '/merchant',
     icon: 'cil-user',
   },
 ];

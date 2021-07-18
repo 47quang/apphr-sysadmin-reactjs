@@ -7,7 +7,6 @@ import {
   CToggler
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import routes from '@Route/routes';
 import '../styles/scss/header.scss';
 
 import {
