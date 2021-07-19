@@ -8,8 +8,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
-import React, { useEffect } from 'react';
-import { CButton, CIcon } from '@coreui/react';
+import React, { useEffect, useState } from 'react';
+import {
+  CButton,
+  CIcon,
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalTitle
+} from '@coreui/react';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -42,11 +49,32 @@ function Merchant(props) {
   useEffect(() => {
     dispatch(fetchMerchants());
   }, []);
-  // function delMerchant(id) {
-  //   dispatch(deleteMerchant(id));
-  // }
+  function delMerchant() {
+    dispatch(deleteMerchant(deleteRowId));
+    closeDialog();
+  }
+  const [isShowDialog, setIsShowDialog] = useState(false);
+  const [deleteRowId, setDeleteRowId] = useState(0);
+  const closeDialog = () => {
+    setDeleteRowId(0);
+    setIsShowDialog(false);
+  };
   return (
     <div>
+      <CModal centered show={isShowDialog} onClose={closeDialog}>
+        <CModalTitle className="text-white px-3 py-3 bg-danger">
+          Cảnh báo
+        </CModalTitle>
+        <CModalBody>Bạn phải cân nhắc trước khi xóa tài khoản này?</CModalBody>
+        <CModalFooter>
+          <CButton size="sm" className="btn btn-light" onClick={closeDialog}>
+            Hủy
+          </CButton>
+          <CButton size="sm" className="btn btn-danger" onClick={delMerchant}>
+            Đồng ý
+          </CButton>
+        </CModalFooter>
+      </CModal>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
@@ -195,9 +223,16 @@ function Merchant(props) {
                   >
                     Xem
                   </CButton>
-                  <CButton size="sm" className="btn-youtube btn-brand mr-1">
+                  {/* <CButton
+                    size="sm"
+                    className="btn-youtube btn-brand mr-1"
+                    onClick={() => {
+                      setDeleteRowId(row.id);
+                      setIsShowDialog(true);
+                    }}
+                  >
                     Xóa
-                  </CButton>
+                  </CButton> */}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

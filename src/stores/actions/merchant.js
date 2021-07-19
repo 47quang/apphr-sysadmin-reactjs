@@ -83,10 +83,10 @@ export function updateMerchant(payload) {
   };
 }
 
-export function activateMerchant(params) {
-  const api = params.isActive
-    ? merchantApi.inactiveMerchant(params.id)
-    : merchantApi.activeMerchant(params.id);
+export function activateMerchant(id, isActive) {
+  const api = isActive
+    ? merchantApi.inactiveMerchant(id)
+    : merchantApi.activeMerchant(id);
   return (dispatch, getState) => {
     api
       .then(resp => {

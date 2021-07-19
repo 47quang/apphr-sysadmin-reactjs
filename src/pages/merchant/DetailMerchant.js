@@ -48,10 +48,8 @@ function DetailMerchant(props) {
     address: '',
     note: '',
     logo: '',
-    amountOfAccount: 10,
-    isActive: false
+    amountOfAccount: 10
   });
-
   useEffect(() => {
     dispatch(getMerchant(props.match.params));
     dispatch(fetchProvinces());
@@ -59,7 +57,7 @@ function DetailMerchant(props) {
 
   useEffect(() => {
     setDetail({ ...detail, ...merchant });
-  }, [merchant.id, merchant.isActive]);
+  }, [merchant.id]);
 
   useEffect(() => {
     dispatch(fetchDistricts({ id: detail.provinceId }));
@@ -90,7 +88,7 @@ function DetailMerchant(props) {
   }
 
   function onActivate() {
-    dispatch(activateMerchant(detail));
+    dispatch(activateMerchant(detail.id, merchant.isActive));
   }
 
   return (
@@ -312,14 +310,14 @@ function DetailMerchant(props) {
         <CButton
           size="md"
           style={{
-            background: `${detail.isActive ? 'red' : '#555e6d'}`,
+            background: `${merchant.isActive ? 'red' : '#555e6d'}`,
             color: 'white',
             position: 'absolute',
             right: 120
           }}
           onClick={onActivate}
         >
-          {detail.isActive ? 'Hủy kích hoạt' : 'Kích hoạt'}
+          {merchant.isActive ? 'Hủy kích hoạt' : 'Kích hoạt'}
         </CButton>
         <CButton
           size="md"
