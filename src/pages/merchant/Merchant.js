@@ -204,11 +204,11 @@ function Merchant(props) {
                   style={{
                     border: '1px solid #d4d3d3',
                     boxSizing: 'border-box',
-                    color: `${row.isActive ? 'green' : 'red'}`,
+                    color: `${row.status === 'active' ? 'green' : 'red'}`,
                     fontWeight: 'bold'
                   }}
                 >
-                  {row.isActive ? 'Đã kích hoạt' : 'Chưa kích hoạt'}
+                  {row.status === 'active' ? 'Đã kích hoạt' : 'Chưa kích hoạt'}
                 </StyledTableCell>
                 <StyledTableCell
                   style={{

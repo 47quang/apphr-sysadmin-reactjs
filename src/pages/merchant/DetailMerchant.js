@@ -88,7 +88,7 @@ function DetailMerchant(props) {
   }
 
   function onActivate() {
-    dispatch(activateMerchant(detail.id, merchant.isActive));
+    dispatch(activateMerchant(detail.id, merchant.status === 'active'));
   }
 
   return (
@@ -310,14 +310,14 @@ function DetailMerchant(props) {
         <CButton
           size="md"
           style={{
-            background: `${merchant.isActive ? 'red' : '#555e6d'}`,
+            background: `${merchant.status === 'active' ? 'red' : '#555e6d'}`,
             color: 'white',
             position: 'absolute',
             right: 120
           }}
           onClick={onActivate}
         >
-          {merchant.isActive ? 'Hủy kích hoạt' : 'Kích hoạt'}
+          {merchant.status === 'active' ? 'Hủy kích hoạt' : 'Kích hoạt'}
         </CButton>
         <CButton
           size="md"
