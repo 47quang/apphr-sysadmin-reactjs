@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CHeader, CHeaderBrand, CHeaderNav, CToggler } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import routes from '@Route/routes';
 import '../styles/scss/header.scss';
 
 import {
