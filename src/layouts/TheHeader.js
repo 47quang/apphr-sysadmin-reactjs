@@ -1,15 +1,9 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { CHeader, CHeaderBrand, CHeaderNav, CToggler } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
+import { CHeader, CHeaderBrand, CHeaderNav, CToggler } from '@coreui/react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import '../styles/scss/header.scss';
-
-import {
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks,
-  TheHeaderDropdown
-} from './index';
+import { TheHeaderDropdown } from './index';
 
 const TheHeader = () => {
   const sidebarShow = useSelector(state => state.style.sidebarShow);
