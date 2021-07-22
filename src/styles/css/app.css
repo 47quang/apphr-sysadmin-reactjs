@@ -12,10 +12,11 @@
 }
 
 .ObjectPage-header-0-2-5 {
-  padding-right: 0 !important; 
+  padding-right: 0 !important;
 }
 
-.c-sidebar .c-sidebar-nav-dropdown-toggle:hover, .c-sidebar .c-sidebar-nav-link:hover {
+.c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
+.c-sidebar .c-sidebar-nav-link:hover {
   background: #303c54 !important;
 }
 
@@ -25,4 +26,8 @@
 
 .c-body {
   background: #f5f5f5 !important;
+}
+
+label {
+  font-weight: bold;
 }

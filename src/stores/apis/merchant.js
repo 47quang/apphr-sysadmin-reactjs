@@ -25,6 +25,18 @@ const MerchantApi = {
         });
     });
   },
+  deleteMerchant(id) {
+    return new Promise((resolve, reject) => {
+      client
+        .delete('/api.tenant/' + id)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
   getMerchant(params) {
     return new Promise((resolve, reject) => {
       client
@@ -41,6 +53,30 @@ const MerchantApi = {
     return new Promise((resolve, reject) => {
       client
         .put(`/api.tenant/${payload.id}`, payload)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+  activeMerchant(id) {
+    return new Promise((resolve, reject) => {
+      client
+        .put(`/api.tenant/${id}/active`)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+  inactiveMerchant(id) {
+    return new Promise((resolve, reject) => {
+      client
+        .put(`/api.tenant/${id}/inactive`)
         .then(data => {
           resolve(data);
         })

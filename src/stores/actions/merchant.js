@@ -16,7 +16,7 @@ export function setMerchant(merchant) {
   return {
     type: SET_MERCHANT,
     payload: merchant
-  }
+  };
 }
 
 export function fetchMerchants(params) {
@@ -24,12 +24,22 @@ export function fetchMerchants(params) {
     merchantApi
       .fetchMerchant(params)
       .then(resp => {
-        dispatch(setMerchants(resp.payload));
+        dispatch(setMerchants(resp.payload.sort((a, b) => a.id - b.id)));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.debug(err));
   };
 }
 
+export function deleteMerchant(params) {
+  return (dispatch, getState) => {
+    merchantApi
+      .deleteMerchant(params)
+      .then(resp => {
+        // dispatch(deleteMerchant)
+      })
+      .catch(err => console.debug(err));
+  };
+}
 
 export function createMerchant(payload, props) {
   payload.provinceId = +payload.provinceId;
@@ -44,7 +54,7 @@ export function createMerchant(payload, props) {
           props.history.push(`/merchant/${resp.payload.id}`);
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => console.debug(err));
   };
 }
 
@@ -55,7 +65,7 @@ export function getMerchant(params) {
       .then(resp => {
         dispatch(setMerchant(resp.payload));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.debug(err));
   };
 }
 
@@ -69,6 +79,19 @@ export function updateMerchant(payload) {
       .then(resp => {
         dispatch(setMerchant(resp.payload));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.debug(err));
+  };
+}
+
+export function activateMerchant(id, isActive) {
+  const api = isActive
+    ? merchantApi.inactiveMerchant(id)
+    : merchantApi.activeMerchant(id);
+  return (dispatch, getState) => {
+    api
+      .then(resp => {
+        dispatch(setMerchant(resp.payload));
+      })
+      .catch(err => console.debug(err));
   };
 }

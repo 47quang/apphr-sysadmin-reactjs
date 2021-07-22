@@ -1,20 +1,9 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  CHeader,
-  CHeaderBrand,
-  CHeaderNav,
-  CToggler
-} from '@coreui/react';
 import CIcon from '@coreui/icons-react';
+import { CHeader, CHeaderBrand, CHeaderNav, CToggler } from '@coreui/react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import '../styles/scss/header.scss';
-
-import {
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks,
-  TheHeaderDropdown
-} from './index';
+import { TheHeaderDropdown } from './index';
 
 const TheHeader = () => {
   const sidebarShow = useSelector(state => state.style.sidebarShow);
@@ -22,11 +11,11 @@ const TheHeader = () => {
 
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow)
-    ? false
-    : 'responsive';
+      ? false
+      : 'responsive';
     dispatch({ type: 'CHANGE_SIDEBARSHOW', payload: { sidebarShow: val } });
   };
-  
+
   const toggleSidebarMobile = () => {
     const val = [false, 'responsive'].includes(sidebarShow)
       ? true
@@ -50,14 +39,13 @@ const TheHeader = () => {
         <CIcon name="logo" height="48" alt="Logo" />
       </CHeaderBrand>
 
-      <CHeaderNav className="d-md-down-none mr-auto">
-      </CHeaderNav>
+      <CHeaderNav className="d-md-down-none mr-auto"></CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif />
+        {/* <TheHeaderDropdownNotif />
         <TheHeaderDropdownMssg />
-        <TheHeaderDropdownTasks />
-        <TheHeaderDropdown/>
+        <TheHeaderDropdownTasks /> */}
+        <TheHeaderDropdown />
       </CHeaderNav>
     </CHeader>
   );
