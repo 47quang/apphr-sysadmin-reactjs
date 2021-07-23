@@ -17,6 +17,7 @@ import {
   CModalFooter,
   CModalTitle
 } from '@coreui/react';
+import { Link } from 'react-router-dom';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -216,13 +217,14 @@ function Merchant(props) {
                     boxSizing: 'border-box'
                   }}
                 >
-                  <CButton
+                  <Link
+                    to={`/merchant/${row.id}`}
                     size="sm"
-                    className="btn-facebook btn-brand mr-1 mb-1"
-                    onClick={() => props.history.push(`merchant/${row.id}`)}
+                    className="btn btn-facebook btn-brand mr-1 mb-1"
                   >
                     Xem
-                  </CButton>
+                  </Link>
+
                   {/* <CButton
                     size="sm"
                     className="btn-youtube btn-brand mr-1"

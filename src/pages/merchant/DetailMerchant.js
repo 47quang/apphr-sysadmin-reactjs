@@ -112,13 +112,13 @@ function DetailMerchant(props) {
           </CCol>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="merchant-code">Tên viết tắt</CLabel>
+              <CLabel htmlFor="merchant-code">Workspace</CLabel>
               <CInputGroup>
                 <CInput
                   id="merchant-code"
                   size="16"
                   type="text"
-                  placeholder="Nhập tên viết tắt"
+                  placeholder="Nhập Workspace"
                   value={detail.code}
                   onChange={e => setDetail({ ...detail, code: e.target.value })}
                 />
@@ -189,20 +189,6 @@ function DetailMerchant(props) {
               />
             </CFormGroup>
           </CCol>
-        </CRow>
-        <CRow>
-          {/* <CCol xs="6">
-            <CFormGroup>
-              <CLabel htmlFor="logo"></CLabel>
-              <CInput
-                id="logo"
-                placeholder="Enter your logo link"
-                required
-                value={detail.logo}
-                onChange={e => setDetail({ ...detail, logo: e.target.value })}
-              />
-            </CFormGroup>
-          </CCol> */}
         </CRow>
 
         <CRow>
@@ -286,7 +272,7 @@ function DetailMerchant(props) {
                 onChange={e => setDetail({ ...detail, wardId: e.target.value })}
               >
                 <option key={0} value={0}>
-                  Chọn phường,xã,thị trấn
+                  Chọn phường/xã/thị trấn
                 </option>
                 {wards.map(mapProvince)}
               </CSelect>
