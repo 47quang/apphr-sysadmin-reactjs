@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../styles/scss/header.scss';
 
-const TheHeader = () => {
+const TheHeader = ({ history, location, match }) => {
+  console.log({ match, location, history });
   const sidebarShow = useSelector(state => state.style.sidebarShow);
   const dispatch = useDispatch();
 
@@ -42,15 +43,11 @@ const TheHeader = () => {
       <CHeaderNav className="d-md-down-none mr-auto"></CHeaderNav>
 
       <CHeaderNav className="px-3">
-        {/* <TheHeaderDropdownNotif />
-        <TheHeaderDropdownMssg />
-        <TheHeaderDropdownTasks /> */}
-        {/* <TheHeaderDropdown /> */}
-        {/* <Link to="/merchant/create"> */}
-        <Link to="/merchant/create" className="btn btn-facebook btn-brand">
-          Thêm doanh nghiệp
-        </Link>
-        {/* </Link> */}
+        {location?.pathname === '/merchant' ? (
+          <Link to="/merchant/create" className="btn btn-facebook btn-brand">
+            Thêm doanh nghiệp
+          </Link>
+        ) : null}
       </CHeaderNav>
     </CHeader>
   );

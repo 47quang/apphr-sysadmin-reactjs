@@ -26,7 +26,14 @@ const TheSidebar = () => {
     >
       <CSidebarBrand className="d-md-down-none" to="/">
         <img
+          className="c-sidebar-brand-full"
           src="/public/images/sysadmin_logo.png"
+          alt=""
+          style={{ height: '35px' }}
+        />
+        <img
+          className="c-sidebar-brand-minimized"
+          src="/public/images/mini_logo.png"
           alt=""
           style={{ height: '35px' }}
         />
