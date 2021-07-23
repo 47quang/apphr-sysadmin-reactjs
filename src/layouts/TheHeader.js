@@ -2,8 +2,8 @@ import CIcon from '@coreui/icons-react';
 import { CHeader, CHeaderBrand, CHeaderNav, CToggler } from '@coreui/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../styles/scss/header.scss';
-import { TheHeaderDropdown } from './index';
 
 const TheHeader = () => {
   const sidebarShow = useSelector(state => state.style.sidebarShow);
@@ -45,7 +45,12 @@ const TheHeader = () => {
         {/* <TheHeaderDropdownNotif />
         <TheHeaderDropdownMssg />
         <TheHeaderDropdownTasks /> */}
-        <TheHeaderDropdown />
+        {/* <TheHeaderDropdown /> */}
+        {/* <Link to="/merchant/create"> */}
+        <Link to="/merchant/create" className="btn btn-facebook btn-brand">
+          Thêm doanh nghiệp
+        </Link>
+        {/* </Link> */}
       </CHeaderNav>
     </CHeader>
   );

@@ -24,7 +24,7 @@ import { createMerchant } from '../../stores/actions/merchant';
 import utils from '../../utils';
 
 function CreateMerchant(props) {
-  const [state, setState] = useState({
+  const [detail, setDetail] = useState({
     username: '',
     password: '',
     email: '',
@@ -51,15 +51,15 @@ function CreateMerchant(props) {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchDistricts({ id: state.provinceId }));
-  }, [state.provinceId]);
+    dispatch(fetchDistricts({ id: detail.provinceId }));
+  }, [detail.provinceId]);
 
   useEffect(() => {
-    dispatch(fetchWards({ id: state.districtId }));
-  }, [state.provinceId, state.districtId]);
+    dispatch(fetchWards({ id: detail.districtId }));
+  }, [detail.provinceId, detail.districtId]);
 
   function randomCode() {
-    setState({ ...state, code: utils.generateCode(5, true) });
+    setDetail({ ...detail, code: utils.generateCode(5, true) });
   }
 
   function back() {
@@ -67,43 +67,51 @@ function CreateMerchant(props) {
   }
 
   function create() {
-    dispatch(createMerchant(state, props));
+    dispatch(createMerchant(detail, props));
+  }
+
+  function mapProvince(p) {
+    return (
+      <option key={p.id} value={p.id}>
+        {p.name}
+      </option>
+    );
   }
 
   return (
-    <CCard style={{width: '60%', margin: 'auto'}}>
+    <CCard style={{ width: '60%', margin: 'auto' }}>
       <CCardHeader>
-        <h4 style={{margin: 0}}>Create Merchant</h4>
+        <h4 style={{ margin: 0 }}>Tạo tài khoản doanh nghiệp</h4>
       </CCardHeader>
       <CCardBody>
         <CRow>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="merchant-name">Merchant name</CLabel>
+              <CLabel htmlFor="merchant-name">Tên doanh nghiệp</CLabel>
               <CInput
                 id="merchant-name"
-                placeholder="Enter your merchant name"
+                placeholder="Nhập tên doanh nghiệp"
                 required
-                value={state.name}
-                onChange={e => setState({ ...state, name: e.target.value })}
+                value={detail.name}
+                onChange={e => setDetail({ ...detail, name: e.target.value })}
               />
             </CFormGroup>
           </CCol>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="merchant-code">Merchant code</CLabel>
+              <CLabel htmlFor="merchant-code">Workspace</CLabel>
               <CInputGroup>
                 <CInput
                   id="merchant-code"
                   size="16"
                   type="text"
-                  placeholder="Enter your merchant code"
-                  value={state.code}
-                  onChange={e => setState({ ...state, code: e.target.value })}
+                  placeholder="Nhập Workspace"
+                  value={detail.code}
+                  onChange={e => setDetail({ ...detail, code: e.target.value })}
                 />
                 <CInputGroupAppend>
                   <CButton color="secondary" onClick={randomCode}>
-                    Random
+                    Ngẫu nhiên
                   </CButton>
                 </CInputGroupAppend>
               </CInputGroup>
@@ -113,194 +121,193 @@ function CreateMerchant(props) {
         <CRow>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="username">Username</CLabel>
-              <CInput
-                id="username"
-                placeholder="Enter your username"
-                required
-                value={state.username}
-                onChange={e => setState({ ...state, username: e.target.value })}
-              />
-            </CFormGroup>
-          </CCol>
-          <CCol xs="6">
-            <CFormGroup>
-              <CLabel htmlFor="password">Password</CLabel>
-              <CInput
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                required
-                value={state.password}
-                onChange={e => setState({ ...state, password: e.target.value })}
-              />
-            </CFormGroup>
-          </CCol>
-        </CRow>
-        <CRow>
-          <CCol xs="6">
-            <CFormGroup>
-              <CLabel htmlFor="address">Address</CLabel>
-              <CInput
-                id="address"
-                placeholder="Enter your address"
-                required
-                value={state.address}
-                onChange={e => setState({ ...state, address: e.target.value })}
-              />
-            </CFormGroup>
-          </CCol>
-          <CCol xs="6">
-            <CFormGroup>
-              <CLabel htmlFor="phone">Phone</CLabel>
-              <CInput
-                id="phone"
-                placeholder="Enter your phone"
-                required
-                value={state.phone}
-                onChange={e => setState({ ...state, phone: e.target.value })}
-              />
-            </CFormGroup>
-          </CCol>
-        </CRow>
-        <CRow>
-          <CCol xs="6">
-            <CFormGroup>
-              <CLabel htmlFor="tax-code">Tax code</CLabel>
-              <CInput
-                id="tax-code"
-                placeholder="Enter your tax code"
-                required
-                value={state.taxCode}
-                onChange={e => setState({ ...state, taxCode: e.target.value })}
-              />
-            </CFormGroup>
-          </CCol>
-          <CCol xs="6">
-            <CFormGroup>
               <CLabel htmlFor="email">Email</CLabel>
               <CInput
                 id="email"
-                placeholder="Enter your email"
+                placeholder="Nhập email"
                 required
-                value={state.email}
-                onChange={e => setState({ ...state, email: e.target.value })}
+                value={detail.email}
+                onChange={e => setDetail({ ...detail, email: e.target.value })}
+              />
+            </CFormGroup>
+          </CCol>
+
+          <CCol xs="6">
+            <CFormGroup>
+              <CLabel htmlFor="phone" className="bold">
+                Số điện thoại
+              </CLabel>
+              <CInput
+                id="phone"
+                placeholder="Nhập số điện thoại"
+                required
+                value={detail.phone}
+                onChange={e => setDetail({ ...detail, phone: e.target.value })}
               />
             </CFormGroup>
           </CCol>
         </CRow>
+
         <CRow>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="logo">Logo link</CLabel>
+              <CLabel htmlFor="tax-code">Mã số thuế</CLabel>
               <CInput
-                id="logo"
-                placeholder="Enter your logo link"
+                id="tax-code"
+                placeholder="Nhập mã số thuế"
                 required
-                value={state.logo}
-                onChange={e => setState({ ...state, logo: e.target.value })}
+                value={detail.taxCode}
+                onChange={e =>
+                  setDetail({ ...detail, taxCode: e.target.value })
+                }
               />
             </CFormGroup>
           </CCol>
           <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="sub-account">Amount of sub account</CLabel>
+              <CLabel htmlFor="address">Địa chỉ</CLabel>
               <CInput
-                id="sub-account"
-                placeholder="Enter your amount of sub account"
+                id="address"
+                placeholder="Nhập địa chỉ"
                 required
-                value={state.amountOfAccount}
+                value={detail.address}
                 onChange={e =>
-                  setState({ ...state, amountOfAccount: e.target.value })
+                  setDetail({ ...detail, address: e.target.value })
+                }
+              />
+            </CFormGroup>
+          </CCol>
+        </CRow>
+
+        <CRow>
+          <CCol xs="6">
+            <CFormGroup>
+              <CLabel htmlFor="username">Username</CLabel>
+              <CInput
+                id="username"
+                placeholder="Nhập username"
+                required
+                value={detail.username}
+                onChange={e =>
+                  setDetail({ ...detail, username: e.target.value })
+                }
+              />
+            </CFormGroup>
+          </CCol>
+          <CCol xs="6">
+            <CFormGroup>
+              <CLabel htmlFor="password">Mật khẩu</CLabel>
+              <CInput
+                type="password"
+                id="password"
+                placeholder="Nhập mật khẩu"
+                required
+                value={detail.password}
+                onChange={e =>
+                  setDetail({ ...detail, password: e.target.value })
                 }
               />
             </CFormGroup>
           </CCol>
         </CRow>
         <CRow>
-          <CCol xs="4">
+          <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="province">Province</CLabel>
+              <CLabel htmlFor="sub-account">Số lượng tài khoản</CLabel>
+              <CInput
+                id="sub-account"
+                placeholder="Nhập số lượng tài khoản"
+                required
+                value={detail.amountOfAccount}
+                onChange={e =>
+                  setDetail({ ...detail, amountOfAccount: e.target.value })
+                }
+              />
+            </CFormGroup>
+          </CCol>
+          <CCol xs="6">
+            <CFormGroup>
+              <CLabel htmlFor="province">Tỉnh/Thành phố</CLabel>
               <CSelect
                 custom
                 name="province"
                 id="province"
-                value={state.provinceId}
+                value={detail.provinceId}
                 onChange={e =>
-                  setState({ ...state, provinceId: e.target.value })
+                  setDetail({ ...detail, provinceId: e.target.value })
                 }
               >
                 <option key={0} value={0}>
-                  Select province
+                  Chọn tỉnh
                 </option>
-                {provinces.map(p => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
-                ))}
+                {provinces.map(mapProvince)}
               </CSelect>
             </CFormGroup>
           </CCol>
-          <CCol xs="4">
+        </CRow>
+        <CRow>
+          <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="district">District</CLabel>
+              <CLabel htmlFor="district">Quận/Huyện</CLabel>
               <CSelect
                 custom
                 name="district"
                 id="district"
-                value={state.districtId}
+                value={detail.districtId}
                 onChange={e =>
-                  setState({ ...state, districtId: e.target.value })
+                  setDetail({ ...detail, districtId: e.target.value })
                 }
               >
                 <option key={0} value={0}>
-                  Select district
+                  Chọn quận/huyện
                 </option>
-                {districts.map(p => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
-                ))}
+                {districts.map(mapProvince)}
               </CSelect>
             </CFormGroup>
           </CCol>
-          <CCol xs="4">
+          <CCol xs="6">
             <CFormGroup>
-              <CLabel htmlFor="ward">Ward</CLabel>
+              <CLabel htmlFor="ward">Phường/xã/Thị trấn</CLabel>
               <CSelect
                 custom
                 name="ward"
                 id="ward"
-                value={state.wardId}
-                onChange={e => setState({ ...state, wardId: e.target.value })}
+                value={detail.wardId}
+                onChange={e => setDetail({ ...detail, wardId: e.target.value })}
               >
                 <option key={0} value={0}>
-                  Select ward
+                  Chọn phường/xã/thị trấn
                 </option>
-                {wards.map(p => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
-                ))}
+                {wards.map(mapProvince)}
               </CSelect>
             </CFormGroup>
           </CCol>
         </CRow>
       </CCardBody>
-      <CCardFooter style={{position: 'relative', height: 60}}>
+      <CCardFooter style={{ position: 'relative', height: 60 }}>
         <CButton
           size="md"
-          style={{ background: '#555e6d', color: 'white', position: 'absolute', left: 20 }}
+          style={{
+            background: '#555e6d',
+            color: 'white',
+            position: 'absolute',
+            left: 20
+          }}
           onClick={back}
         >
-          Back
+          Quay về
         </CButton>
         <CButton
           size="md"
-          style={{ background: '#555e6d', color: 'white', position: 'absolute', right: 20}}
+          style={{
+            background: '#555e6d',
+            color: 'white',
+            position: 'absolute',
+            right: 20
+          }}
           onClick={create}
         >
-          Create
+          Tạo
         </CButton>
       </CCardFooter>
     </CCard>
